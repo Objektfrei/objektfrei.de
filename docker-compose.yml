@@ -1,0 +1,95 @@
+# Objektfrei – Produktivbetrieb hinter Traefik
+#
+# Traefik übernimmt Ports, TLS und Let's Encrypt. Dieser Stack veröffentlicht
+# deshalb selbst keine Ports und hängt nur im externen Netzwerk `web`.
+#
+# Start:  docker compose up -d --build
+# Update: docker compose build --no-cache && docker compose up -d
+
+services:
+
+  ##
+  # Der Webserver. Liefert site/ statisch aus und gibt einzig
+  # /anfrage.php an PHP-FPM weiter.
+  ##
+  web:
+    image: nginx:alpine
+    restart: unless-stopped
+
+    networks:
+      - web        # nur hierüber spricht Traefik
+      - intern     # nur hierüber spricht nginx mit PHP
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+
+      # HTTPS Router
+      - "traefik.http.routers.objektfrei.rule=Host(`${DOMAIN:?DOMAIN in .env setzen}`) || Host(`www.${DOMAIN}`)"
+      - "traefik.http.routers.objektfrei.entrypoints=websecure"
+      - "traefik.http.routers.objektfrei.tls=true"
+      - "traefik.http.routers.objektfrei.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.objektfrei.service=objektfrei-svc"
+      - "traefik.http.routers.objektfrei.middlewares=objektfrei-www"
+
+      # HTTP Router für die Weiterleitung
+      - "traefik.http.routers.objektfrei-http.rule=Host(`${DOMAIN}`) || Host(`www.${DOMAIN}`)"
+      - "traefik.http.routers.objektfrei-http.entrypoints=web"
+      - "traefik.http.routers.objektfrei-http.middlewares=objektfrei-tls"
+
+      # Middleware Definitionen. Die Namen gelten Traefik-weit, nicht pro Stack –
+      # deshalb überall das Präfix objektfrei-, sonst kollidiert es mit anderen
+      # Projekten auf demselben Traefik.
+      - "traefik.http.middlewares.objektfrei-tls.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.objektfrei-tls.redirectscheme.permanent=true"
+      # www.objektfrei.de -> objektfrei.de ($$ ist die Compose-Maskierung für Traefiks ${1})
+      - "traefik.http.middlewares.objektfrei-www.redirectregex.regex=^https://www\\.(.*)"
+      - "traefik.http.middlewares.objektfrei-www.redirectregex.replacement=https://$${1}"
+      - "traefik.http.middlewares.objektfrei-www.redirectregex.permanent=true"
+
+      # Service Definition (Port des Nginx im Container)
+      - "traefik.http.services.objektfrei-svc.loadbalancer.server.port=80"
+
+    volumes:
+      - ./nginx/objektfrei.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./site:/srv:ro
+
+    depends_on:
+      - php
+
+  ##
+  # PHP-FPM, ausschließlich für das Anfrageformular.
+  # Hängt nicht im Netz `web` und ist damit nur für nginx erreichbar.
+  ##
+  php:
+    build: ./app
+    restart: unless-stopped
+    env_file: .env
+
+    networks:
+      - intern
+
+    volumes:
+      - objektfrei_data:/var/objektfrei
+
+  # Optionaler Virenscanner. Braucht rund 1 GB Arbeitsspeicher.
+  # Zum Aktivieren: Zeilen einkommentieren und CLAMAV_HOST=clamav in .env setzen.
+  # clamav:
+  #   image: clamav/clamav:stable
+  #   restart: unless-stopped
+  #   networks:
+  #     - intern
+  #   volumes:
+  #     - clamav_db:/var/lib/clamav
+
+volumes:
+  # Hochgeladene Fotos und PHP-Fehlerprotokoll.
+  objektfrei_data:
+  # clamav_db:
+
+networks:
+  # Das externe Traefik-Netzwerk.
+  web:
+    external: true
+  # Projektinternes Netz zwischen nginx und PHP.
+  intern:

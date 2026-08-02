@@ -1,0 +1,44 @@
+name: GitHub Pages
+
+# Veröffentlicht den Inhalt von site/ als GitHub Page.
+# Kein Build-Schritt – die Seite ist reines HTML.
+
+on:
+  push:
+    branches: [trunk]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Läuft immer nur ein Deployment; neuere Pushes brechen laufende nicht ab.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      # Verhindert, dass Pages die Dateien durch Jekyll verarbeitet.
+      - name: .nojekyll anlegen
+        run: touch site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

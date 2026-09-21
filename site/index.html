@@ -1272,9 +1272,13 @@ body.at-top .burger span{background:var(--cream)}
 body.at-top .brand-mark{filter:brightness(0) invert(1)}
 
 /* ---------- Hero mit Foto ---------- */
-.hero{position:relative;padding:0;margin-top:-73px;min-height:74vh;max-height:800px;display:flex;align-items:center;
+/* min-height schlaegt max-height – deshalb EIN Wert statt zweier.
+   min() deckelt die Hoehe auch auf sehr hohen Bildschirmen. */
+.hero{position:relative;padding:0;margin-top:-73px;min-height:min(72vh,660px);display:flex;align-items:flex-start;
   background:var(--green-deep);color:var(--cream);overflow:hidden}
-.hero-bg{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:70% 26%}
+/* Die Huelle schneidet ab – so kann das Foto nach rechts ruecken, ohne die Seite zu verbreitern */
+.hero-huelle{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden}
+.hero-bg{position:absolute;top:0;left:4%;bottom:0;width:100%;height:100%;object-fit:cover;object-position:70% 26%}
 .hero-shade{position:absolute;top:0;left:0;right:0;bottom:0;
   background:linear-gradient(90deg,var(--green-deep) 0%,var(--green-deep) 30%,rgba(27,42,33,.8) 44%,rgba(27,42,33,.22) 62%,rgba(27,42,33,0) 78%),
              linear-gradient(0deg,rgba(27,42,33,.55) 0%,rgba(27,42,33,0) 30%),
@@ -1293,6 +1297,7 @@ body.at-top .brand-mark{filter:brightness(0) invert(1)}
 .hero .cta-note{opacity:.62;color:var(--cream);text-align:center;max-width:430px}
 .hero{overflow:visible}
 .hero-bg,.hero-shade{overflow:hidden}
+.hero>.wrap{position:relative;z-index:2}
 .hero .prot-wrap{position:relative;z-index:3;margin-bottom:-64px}
 .hero .protokoll{background:#F6F2EA;color:var(--green);max-width:410px;margin-left:auto;
   padding:30px 30px 24px;transform:rotate(2.2deg);box-shadow:0 44px 80px -20px rgba(0,0,0,.65)}
@@ -1303,16 +1308,19 @@ body.at-top .brand-mark{filter:brightness(0) invert(1)}
 .hero .p-check svg{stroke:var(--rust)}
 .hero .p-status{margin-top:18px;align-items:center}
 .hero .p-status .lbl{opacity:1;font-size:16px;letter-spacing:.22em;font-weight:600;color:var(--green)}
+/* -40px = 10 px Ueberstand: der Rahmen ragt heraus, das I liegt noch auf der Karte */
 .hero .stamp{color:var(--rust);border-color:var(--rust);font-size:23px;padding:11px 18px;border-width:3px;
-  margin-right:-64px;transform:rotate(-3.5deg);white-space:nowrap}
+  margin-right:-40px;transform:rotate(-3.5deg);white-space:nowrap}
 .hero .p-status{gap:16px}
-/* Zwischen 921 und 1220 px klebt die Karte am Seitenrand – dort ragt der Stempel weniger heraus */
-@media(min-width:921px) and (max-width:1207px){.hero .stamp{margin-right:-40px}}
 .hero .p-express{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;
   color:var(--green);opacity:.95;font-weight:600;font-family:'IBM Plex Mono',monospace}
 .hero .p-express svg{stroke:var(--green)}
 .hero .hero-note{display:none}
 @media(max-width:920px){
+  .hero-shade{background:
+    linear-gradient(90deg,var(--green-deep) 0%,rgba(27,42,33,.93) 44%,rgba(27,42,33,.66) 72%,rgba(27,42,33,.48) 100%),
+    linear-gradient(0deg,rgba(27,42,33,.6) 0%,rgba(27,42,33,0) 34%),
+    linear-gradient(180deg,rgba(27,42,33,.74) 0%,rgba(27,42,33,0) 30%)}
   .hero>.wrap{padding-top:100px;padding-bottom:50px}
   .hero-grid{grid-template-columns:1fr;gap:38px}
   .hero-bg{object-position:46% 30%}
@@ -1345,37 +1353,61 @@ body.at-top .brand-mark{filter:brightness(0) invert(1)}
   .zahl:nth-child(3){padding-left:0;border-left:0}
 }
 
-/* ---------- Ablauf: Linie mit OF-Logo ---------- */
-.track{position:relative;height:48px;margin-bottom:24px}
-.track-line{position:absolute;left:5px;right:56px;top:23px;height:2px;background:rgba(38,56,44,.14)}
-.track-fill{position:absolute;left:5px;top:23px;height:2px;width:0;background:var(--rust);transition:width 1.6s cubic-bezier(.4,0,.2,1)}
-.track.done .track-fill{width:calc(100% - 61px)}
-.track-dot{position:absolute;top:16px;width:18px;height:18px;border-radius:50%;background:var(--cream);
-  border:4px solid var(--cream);box-shadow:0 0 0 1.5px rgba(38,56,44,.28);transition:background .3s ease,box-shadow .3s ease}
-.track.done .track-dot{background:var(--rust);box-shadow:0 0 0 1.5px var(--rust)}
-.track.done .track-dot:nth-of-type(2){transition-delay:.35s}
-.track.done .track-dot:nth-of-type(3){transition-delay:.75s}
-.track.done .track-dot:nth-of-type(4){transition-delay:1.15s}
-.track-mark{position:absolute;top:2px;left:0;width:46px;height:36px;transition:left 1.6s cubic-bezier(.4,0,.2,1)}
-.track.done .track-mark{left:calc(100% - 46px)}
-@media(prefers-reduced-motion:reduce){
-  .track-fill{width:calc(100% - 61px);transition:none}
-  .track-mark{left:calc(100% - 46px);transition:none}
-  .track-dot{background:var(--rust);box-shadow:0 0 0 1.5px var(--rust);transition:none}
-}
+/* ---------- Ablauf: Spur, die an der Scrollstrecke haengt ----------
+   Grundzustand = fertige Linie. Erst wenn das Skript laeuft, setzt es die
+   Klasse js-track und uebernimmt die Steuerung ueber die Variablen.      */
+.track{position:relative;height:54px;margin-bottom:26px}
+.track-line{position:absolute;left:5px;top:26px;height:2px;
+  width:var(--len,calc(100% - 175px));background:rgba(38,56,44,.14)}
+.track-fill{position:absolute;left:5px;top:26px;height:2px;
+  width:var(--w1,calc(100% - 175px));background:var(--rust)}
+.track-fill2{position:absolute;top:26px;height:2px;left:var(--g0,0px);width:var(--w2,0px);
+  background:var(--green)}
+.track-dot{position:absolute;top:19px;width:18px;height:18px;border-radius:50%;
+  background:var(--rust);border:4px solid var(--cream);box-shadow:0 0 0 1.5px var(--rust);
+  transition:background .25s ease,box-shadow .25s ease}
+.track-mark{position:absolute;top:8px;left:var(--mx,calc(100% - 175px));
+  display:flex;align-items:center;gap:11px}
+.track-mark>svg{width:46px;height:36px;flex:none;display:block}
+.track-word{font-family:'Archivo',sans-serif;font-weight:700;font-size:21px;
+  letter-spacing:-.005em;color:var(--rust);white-space:nowrap;line-height:1}
+.track-word i{font-style:normal;transition:opacity .15s ease}
+.track.js-track .track-dot{background:var(--cream);box-shadow:0 0 0 1.5px rgba(38,56,44,.28)}
+.track.js-track .track-dot.on{background:var(--rust);box-shadow:0 0 0 1.5px var(--rust)}
+.track.js-track .track-dot.gruen{background:var(--green);box-shadow:0 0 0 1.5px var(--green)}
+.track.js-track .track-word i{opacity:0}
+.track.js-track .track-word i.on{opacity:1}
 @media(min-width:861px){.steps{border-top:0}.step{border-top:0;padding-top:0}.step .dot{display:none}}
-/* Am Handy: eine senkrechte Linie, Punkte, Logo am Ende */
-.track-end{display:none}
+
+/* Am Handy laeuft dieselbe Spur senkrecht mit */
+.vtrack{display:none}
 @media(max-width:860px){
   .track{display:none}
   .steps{position:relative;grid-template-columns:1fr;gap:0;padding-left:34px}
   .steps::before{content:"";position:absolute;left:7px;top:7px;bottom:20px;width:2px;background:var(--rust);opacity:.45}
   .step{border-top:0;border-left:0;padding:0 0 28px 0;position:relative}
-  .step:last-child{padding-bottom:10px}
+  .step:last-child{padding-bottom:16px}
   .step::after{content:"";position:absolute;left:-34px;top:3px;width:16px;height:16px;border-radius:50%;
-    background:var(--rust);border:4px solid var(--cream);box-shadow:0 0 0 1.5px var(--rust)}
+    background:var(--rust);border:4px solid var(--cream);box-shadow:0 0 0 1.5px var(--rust);
+    transition:background .25s ease,box-shadow .25s ease}
   .step::before{position:static}
-  .track-end{display:block;width:42px;margin:2px 0 0 -6px}
+  /* Skript laeuft: statische Linie raus, Spur rein */
+  .steps.js-track{padding-bottom:56px}
+  .steps.js-track::before{display:none}
+  .steps.js-track .vtrack{display:block}
+  .steps.js-track .step::after{background:var(--cream);box-shadow:0 0 0 1.5px rgba(38,56,44,.28)}
+  .steps.js-track .step.on::after{background:var(--rust);box-shadow:0 0 0 1.5px var(--rust)}
+  .steps.js-track .step.gruen::after{background:var(--green);box-shadow:0 0 0 1.5px var(--green)}
+  .vtrack{position:absolute;left:0;top:7px;bottom:0;width:0}
+  .vtrack-line{position:absolute;left:7px;top:0;width:2px;height:var(--len,0px);background:rgba(38,56,44,.14)}
+  .vtrack-fill{position:absolute;left:7px;top:0;width:2px;height:var(--w1,0px);background:var(--rust)}
+  .vtrack-fill2{position:absolute;left:7px;top:var(--g0,0px);width:2px;height:var(--w2,0px);background:var(--green)}
+  .vtrack-mark{position:absolute;left:-14px;top:var(--my,0px);display:flex;align-items:center;gap:10px}
+  .vtrack-mark>svg{width:42px;height:33px;flex:none;display:block}
+  .vtrack-word{font-family:'Archivo',sans-serif;font-weight:700;font-size:19px;
+    color:var(--rust);white-space:nowrap;line-height:1}
+  .vtrack-word i{font-style:normal;opacity:0;transition:opacity .15s ease}
+  .vtrack-word i.on{opacity:1}
 }
 
 /* ---------- Zielgruppen mit Foto ---------- */
@@ -1535,8 +1567,8 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="start">
-  <img src="img/hero-team.webp" srcset="img/hero-team-1200.webp 1200w, img/hero-team.webp 1400w" sizes="100vw" alt="Das Objektfrei-Team trägt Transportkisten zum Transporter" class="hero-bg" fetchpriority="high" decoding="async">
-  <div class="hero-shade"></div>
+  <div class="hero-huelle"><img src="img/hero-team.webp" srcset="img/hero-team-1200.webp 1200w, img/hero-team.webp 1400w" sizes="100vw" alt="Das Objektfrei-Team trägt Transportkisten zum Transporter" class="hero-bg" fetchpriority="high" decoding="async">
+  <div class="hero-shade"></div></div>
   <div class="wrap hero-grid">
     <div>
       <h1><span class="eyebrow">Entrümpelung · Wiesbaden &amp; Rhein-Main</span>Ihr Objekt <em>in guten Händen.</em></h1>
@@ -1581,7 +1613,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
   <div class="wrap zahlen-grid">
     <div class="zahl of-rv"><b>60<i>&nbsp;Sek.</i></b><p>bis zu Ihrer persönlichen<br>Preisspanne</p></div>
     <div class="zahl of-rv"><b>4<i>&nbsp;h</i></b><p>Rückmeldung auf Ihre Anfrage<br>an Werktagen</p></div>
-    <div class="zahl zahl-wort of-rv"><b>kostenfrei</b><p>Besichtigung und Festpreis-Angebot –<br>auch wenn Sie danach Nein sagen</p></div>
+    <div class="zahl zahl-wort of-rv"><b>kostenfrei</b><p>Besichtigung und Angebot –<br>auch wenn Sie danach Nein sagen</p></div>
     <div class="zahl of-rv"><b>24<i>&nbsp;h</i></b><p>Express-Räumung möglich –<br>auf Anfrage auch kurzfristig</p></div>
   </div>
 </section>
@@ -1641,14 +1673,18 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       <h2>Von der Anfrage bis zur Übergabe in vier Schritten.</h2>
     </div>
     <div class="track" id="track" aria-hidden="true">
-      <span class="track-line"></span><span class="track-fill"></span>
+      <span class="track-line"></span><span class="track-fill"></span><span class="track-fill2"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*0 - 4px)"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*1 - 4px)"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*2 - 4px)"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*3 - 4px)"></span>
-      <svg class="track-mark" viewBox="0 0 114 88"><path fill="#A65621" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg>
+      <span class="track-mark"><svg viewBox="0 0 114 88" aria-hidden="true"><path fill="#A65621" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg><span class="track-word"><i>o</i><i>b</i><i>j</i><i>e</i><i>k</i><i>t</i><i>f</i><i>r</i><i>e</i><i>i</i></span></span>
     </div>
     <div class="steps">
+      <div class="vtrack" aria-hidden="true">
+        <span class="vtrack-line"></span><span class="vtrack-fill"></span><span class="vtrack-fill2"></span>
+        <span class="vtrack-mark"><svg viewBox="0 0 114 88" aria-hidden="true"><path fill="#A65621" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg><span class="vtrack-word"><i>o</i><i>b</i><i>j</i><i>e</i><i>k</i><i>t</i><i>f</i><i>r</i><i>e</i><i>i</i></span></span>
+      </div>
       <div class="step"><span class="dot"></span>
         <h3>Anfrage</h3>
         <p>Per Preisrechner, Telefon oder E-Mail – Sie erhalten noch am selben Werktag eine Rückmeldung.</p>
@@ -1666,7 +1702,6 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
         <p>Wir räumen, reinigen und übergeben besenrein – mit Protokoll, pünktlich zum vereinbarten Termin.</p>
       </div>
     </div>
-    <svg class="track-end" viewBox="0 0 114 88" aria-hidden="true"><path fill="#A65621" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg>
   </div>
 </section>
 
@@ -3127,14 +3162,89 @@ if(stepsEl&&'IntersectionObserver' in window){
     });
   }, 4000);
 })();
-/* Ablauf: Linie zeichnet sich, das OF-Logo fährt als Pfeilspitze mit */
+/* Ablauf: die Spur haengt an der Scrollstrecke.
+   Sie startet erst, wenn der Bereich sichtbar ist, und laeuft rueckwaerts
+   genau so weit zurueck, wie zurueckgescrollt wird.                        */
 (function(){
-  var t=document.getElementById('track'); if(!t) return;
-  if(!('IntersectionObserver' in window)){ t.classList.add('done'); return; }
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ t.classList.add('done'); io.disconnect(); } });
-  },{threshold:.4});
-  io.observe(t);
+  var steps = document.querySelector('.steps');
+  if(!steps) return;
+  var track  = document.getElementById('track');
+  var vtrack = steps.querySelector('.vtrack');
+  if(!track && !vtrack) return;
+
+  var dots    = track ? [].slice.call(track.querySelectorAll('.track-dot')) : [];
+  var markH   = track ? track.querySelector('.track-mark') : null;
+  var lettH   = track ? [].slice.call(track.querySelectorAll('.track-word i')) : [];
+  var markV   = vtrack ? vtrack.querySelector('.vtrack-mark') : null;
+  var lettV   = vtrack ? [].slice.call(vtrack.querySelectorAll('.vtrack-word i')) : [];
+  var stepEls = [].slice.call(steps.querySelectorAll('.step'));
+
+  if(track) track.classList.add('js-track');
+  steps.classList.add('js-track');
+
+  function klemm(v,a,b){ return v<a?a:(v>b?b:v); }
+
+  function zeichne(el, weg, viertel, pos, marke, letts, wandernd, senkrecht){
+    var bronze = Math.min(pos, viertel);
+    var gruen  = Math.max(0, pos - viertel);
+    el.style.setProperty('--len', weg + 'px');
+    el.style.setProperty('--w1',  bronze + 'px');
+    el.style.setProperty('--g0',  viertel + 'px');
+    el.style.setProperty('--w2',  gruen + 'px');
+    el.style.setProperty(senkrecht ? '--my' : '--mx', pos + 'px');
+    var anteil = weg > viertel ? klemm((pos - viertel) / (weg - viertel), 0, 1) : 0;
+    var n = Math.round(anteil * letts.length);
+    for(var i=0;i<letts.length;i++) letts[i].classList.toggle('on', i < n);
+  }
+
+  /* Wie weit ist ein Element durch das Fenster gewandert? 0 = noch unten, 1 = fertig.
+     Die Strecke ist so gewaehlt, dass die Spur fertig ist, solange sie noch gut im Bild steht. */
+  function fortschritt(el, startAnteil, zusatz, mindest){
+    var r  = el.getBoundingClientRect();
+    var vh = window.innerHeight || 800;
+    var strecke = Math.max(r.height + vh*zusatz, vh*mindest);
+    return klemm((vh*startAnteil - r.top) / strecke, 0, 1);
+  }
+
+  function aktualisiere(){
+    if(track && track.offsetParent){
+      var p = fortschritt(track, 0.92, 0, 0.55);
+      var mw  = markH.offsetWidth || 170;
+      var weg = Math.max(1, track.clientWidth - mw - 5);
+      var d   = dots.map(function(x){ return klemm(x.offsetLeft + x.offsetWidth/2 - 5, 0, weg); });
+      var v4  = d.length > 3 ? d[3] : weg;
+      var pos = p * weg;
+      zeichne(track, weg, v4, pos, markH, lettH, true, false);
+      for(var i=0;i<dots.length;i++){
+        dots[i].classList.toggle('on',    pos >= d[i] - 6);
+        dots[i].classList.toggle('gruen', i === 3 && pos >= d[3] - 6);
+      }
+    }
+    if(vtrack && vtrack.offsetParent){
+      var p = fortschritt(steps, 0.85, 0.15, 0.45);
+      var mh  = markV.offsetHeight || 34;
+      var weg2 = Math.max(1, steps.clientHeight - 7 - mh - 6);
+      var d2  = stepEls.map(function(x){ return klemm(x.offsetTop + 4, 0, weg2); });
+      var w4  = d2.length > 3 ? d2[3] : weg2;
+      var pos2 = p * weg2;
+      zeichne(vtrack, weg2, w4, pos2, markV, lettV, true, true);
+      for(var k=0;k<stepEls.length;k++){
+        stepEls[k].classList.toggle('on',    pos2 >= d2[k] - 6);
+        stepEls[k].classList.toggle('gruen', k === 3 && pos2 >= d2[3] - 6);
+      }
+    }
+  }
+
+  var laeuft = false;
+  function anstossen(){
+    if(laeuft) return;
+    laeuft = true;
+    requestAnimationFrame(function(){ aktualisiere(); laeuft = false; });
+  }
+  window.addEventListener('scroll', anstossen, {passive:true});
+  window.addEventListener('resize', anstossen);
+  window.addEventListener('load', anstossen);
+  aktualisiere();
 })();
 </script>
 </body>

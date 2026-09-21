@@ -1272,14 +1272,14 @@ body.at-top .burger span{background:var(--cream)}
 body.at-top .brand-mark{filter:brightness(0) invert(1)}
 
 /* ---------- Hero mit Foto ---------- */
-.hero{position:relative;padding:0;margin-top:-73px;min-height:88vh;max-height:920px;display:flex;align-items:center;
+.hero{position:relative;padding:0;margin-top:-73px;min-height:74vh;max-height:800px;display:flex;align-items:center;
   background:var(--green-deep);color:var(--cream);overflow:hidden}
 .hero-bg{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:70% 26%}
 .hero-shade{position:absolute;top:0;left:0;right:0;bottom:0;
   background:linear-gradient(90deg,var(--green-deep) 0%,var(--green-deep) 30%,rgba(27,42,33,.8) 44%,rgba(27,42,33,.22) 62%,rgba(27,42,33,0) 78%),
              linear-gradient(0deg,rgba(27,42,33,.55) 0%,rgba(27,42,33,0) 30%),
              linear-gradient(180deg,rgba(27,42,33,.65) 0%,rgba(27,42,33,0) 20%)}
-.hero>.wrap{position:relative;z-index:2;width:100%;padding-top:150px;padding-bottom:110px}
+.hero>.wrap{position:relative;z-index:2;width:100%;padding-top:118px;padding-bottom:74px}
 .hero-grid{grid-template-columns:minmax(0,560px) 1fr;gap:56px}
 .hero h1{font-size:clamp(32px,4.3vw,52px);font-weight:600;font-variation-settings:'wdth' 100;margin:0 0 22px;letter-spacing:-.012em}
 .hero h1 .eyebrow{display:block;color:#D08650;margin-bottom:20px}
@@ -1293,7 +1293,7 @@ body.at-top .brand-mark{filter:brightness(0) invert(1)}
 .hero .cta-note{opacity:.62;color:var(--cream);text-align:center;max-width:430px}
 .hero{overflow:visible}
 .hero-bg,.hero-shade{overflow:hidden}
-.hero .prot-wrap{position:relative;z-index:3;margin-bottom:-96px}
+.hero .prot-wrap{position:relative;z-index:3;margin-bottom:-64px}
 .hero .protokoll{background:#F6F2EA;color:var(--green);max-width:410px;margin-left:auto;
   padding:30px 30px 24px;transform:rotate(2.2deg);box-shadow:0 44px 80px -20px rgba(0,0,0,.65)}
 .hero .protokoll .p-head{border-bottom:1.5px solid var(--green);padding-bottom:12px;margin-bottom:6px}
@@ -1303,21 +1303,25 @@ body.at-top .brand-mark{filter:brightness(0) invert(1)}
 .hero .p-check svg{stroke:var(--rust)}
 .hero .p-status{margin-top:18px;align-items:center}
 .hero .p-status .lbl{opacity:1;font-size:16px;letter-spacing:.22em;font-weight:600;color:var(--green)}
-.hero .stamp{color:var(--rust);border-color:var(--rust);font-size:17px;padding:6px 13px;border-width:2.5px}
+.hero .stamp{color:var(--rust);border-color:var(--rust);font-size:23px;padding:11px 18px;border-width:3px;
+  margin-right:-64px;transform:rotate(-3.5deg);white-space:nowrap}
+.hero .p-status{gap:16px}
+/* Zwischen 921 und 1220 px klebt die Karte am Seitenrand – dort ragt der Stempel weniger heraus */
+@media(min-width:921px) and (max-width:1207px){.hero .stamp{margin-right:-40px}}
 .hero .p-express{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;
   color:var(--green);opacity:.95;font-weight:600;font-family:'IBM Plex Mono',monospace}
 .hero .p-express svg{stroke:var(--green)}
 .hero .hero-note{display:none}
 @media(max-width:920px){
-  .hero>.wrap{padding-top:120px;padding-bottom:72px}
+  .hero>.wrap{padding-top:100px;padding-bottom:50px}
   .hero-grid{grid-template-columns:1fr;gap:38px}
-  .hero-bg{object-position:62% 22%}
+  .hero-bg{object-position:46% 30%}
   .hero .protokoll{margin-left:0;transform:none;max-width:420px}
   .hero .prot-wrap{margin-bottom:0}
 }
 @media(max-width:720px){
   .hero{min-height:0;margin-top:-63px}
-  .hero>.wrap{padding-top:104px;padding-bottom:56px}
+  .hero>.wrap{padding-top:86px;padding-bottom:34px}
   .hero h1{font-size:clamp(28px,8.4vw,36px)}
   .hero p.lead{font-size:16.5px}
   .hero .btn-primary{padding:17px 24px;font-size:16px}
@@ -1472,6 +1476,30 @@ body.menu-open .burger span{background:var(--green)}
 body.menu-open .brand-mark{filter:none}
 body.menu-open .mnav{padding-top:84px}
 
+/* ---------- Einblenden der neuen Bereiche (Zahlen, Referenzen) ----------
+   Ohne die Klasse js-rv am <html> bleibt alles sichtbar. Sollte das
+   Skript nicht laufen, ist der Inhalt also trotzdem da.                  */
+html.js-rv .of-rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+html.js-rv .of-rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html.js-rv .of-rv{opacity:1;transform:none;transition:none}
+}
+
+/* ---------- Leistungs-Karten am Handy: im Wisch-Band immer sichtbar ---------- */
+@media(max-width:860px){.cards .card.rv{opacity:1;transform:none}}
+
+/* ---------- Ablauf: alte Linie stilllegen, die neue Spur ersetzt sie ---------- */
+.steps::after{display:none}
+
+/* ---------- Zitat: die Fußzeilen-Regel der Seite trifft das <footer> im Zitat ---------- */
+.founder-quote footer{padding:0}
+
+/* ---------- Schluss-CTA am Handy: runder Knopf mittig ---------- */
+@media(max-width:860px){
+  .cta-round{align-self:center;gap:20px}
+  .cta-flex{gap:30px}
+}
+
 /* ---------- Seriosität am Handy: Überschrift über dem Text, nicht daneben ---------- */
 @media(max-width:860px){
   .check-item{flex-wrap:wrap;row-gap:4px}
@@ -1537,7 +1565,7 @@ body.menu-open .mnav{padding-top:84px}
       <div class="p-item" style="--i:1"><span class="p-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A65621" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Wertanrechnung geprüft</div>
       <div class="p-item" style="--i:2"><span class="p-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A65621" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Besenrein gereinigt</div>
       <div class="p-item" style="--i:3"><span class="p-check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A65621" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Schlüssel übergeben</div>
-      <div class="p-express"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Express in 24&nbsp;h möglich – auch Sa&nbsp;&amp;&nbsp;So</div>
+      <div class="p-express"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Express-Räumung in 24&nbsp;h möglich</div>
       <div class="p-status">
         <span class="lbl">STATUS</span>
         <span class="stamp">OBJEKTFREI</span>
@@ -1551,10 +1579,10 @@ body.menu-open .mnav{padding-top:84px}
 <!-- ============ ZAHLEN ============ -->
 <section class="zahlen">
   <div class="wrap zahlen-grid">
-    <div class="zahl rv"><b>60<i>&nbsp;Sek.</i></b><p>bis zu Ihrer persönlichen<br>Preisspanne</p></div>
-    <div class="zahl rv"><b>4<i>&nbsp;h</i></b><p>Rückmeldung auf Ihre Anfrage<br>an Werktagen</p></div>
-    <div class="zahl zahl-wort rv"><b>kostenfrei</b><p>Besichtigung und Festpreis-Angebot,<br>auch wenn Sie danach Nein sagen</p></div>
-    <div class="zahl rv"><b>24<i>&nbsp;h</i></b><p>Express-Räumung möglich –<br>auch Samstag &amp; Sonntag</p></div>
+    <div class="zahl of-rv"><b>60<i>&nbsp;Sek.</i></b><p>bis zu Ihrer persönlichen<br>Preisspanne</p></div>
+    <div class="zahl of-rv"><b>4<i>&nbsp;h</i></b><p>Rückmeldung auf Ihre Anfrage<br>an Werktagen</p></div>
+    <div class="zahl zahl-wort of-rv"><b>kostenfrei</b><p>Besichtigung und Festpreis-Angebot –<br>auch wenn Sie danach Nein sagen</p></div>
+    <div class="zahl of-rv"><b>24<i>&nbsp;h</i></b><p>Express-Räumung möglich –<br>auf Anfrage auch kurzfristig</p></div>
   </div>
 </section>
 
@@ -1972,18 +2000,18 @@ body.menu-open .mnav{padding-top:84px}
       <p>Wir dokumentieren jeden Einsatz mit Vorher-/Nachher-Aufnahmen – eigene Fotos aus echten Objekten, keine Symbolbilder. Nach Abschluss bitten wir jeden Kunden um eine Google-Bewertung.</p>
     </div>
     <div class="refgrid">
-<div class="refcard rv"><div class="imgs two"><figure><img src="img/ref-brand-vorher.webp" srcset="img/ref-brand-vorher-800.webp 800w, img/ref-brand-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Küche nach einem Brand: verrußte Wand, beschädigte Möbel und Hausrat" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-brand-nachher.webp" srcset="img/ref-brand-nachher-800.webp 800w, img/ref-brand-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dieselbe Küchenwand nach Demontage und Entsorgung des Brandschutts" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Brandschaden</span><h3>Küche nach Brand – geräumt und rückgebaut</h3><p>Einbauküche demontiert, Brandschutt entsorgt, Raum bereit für die Sanierung. Eigene Aufnahmen, kein Symbolbild.</p></div></div>
-<div class="refcard rv"><div class="imgs two"><figure><img src="img/ref-wohnung-vorher.webp" srcset="img/ref-wohnung-vorher-800.webp 800w, img/ref-wohnung-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Vollgestelltes Wohnzimmer vor der Haushaltsauflösung" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-wohnung-nachher.webp" srcset="img/ref-wohnung-nachher-800.webp 800w, img/ref-wohnung-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Derselbe Wohnbereich nach der Räumung: leer und besenrein" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Wohnung</span><h3>Wohnungsräumung – vollständig geräumt</h3><p>Hausrat, Möbel und Textilien sortiert, Verwertbares angerechnet, der Rest fachgerecht entsorgt.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-brand-vorher.webp" srcset="img/ref-brand-vorher-800.webp 800w, img/ref-brand-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Küche nach einem Brand: verrußte Wand, beschädigte Möbel und Hausrat" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-brand-nachher.webp" srcset="img/ref-brand-nachher-800.webp 800w, img/ref-brand-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dieselbe Küchenwand nach Demontage und Entsorgung des Brandschutts" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Brandschaden</span><h3>Küche nach Brand – geräumt und rückgebaut</h3><p>Einbauküche demontiert, Brandschutt entsorgt, Raum bereit für die Sanierung. Eigene Aufnahmen, kein Symbolbild.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-wohnung-vorher.webp" srcset="img/ref-wohnung-vorher-800.webp 800w, img/ref-wohnung-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Vollgestelltes Wohnzimmer vor der Haushaltsauflösung" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-wohnung-nachher.webp" srcset="img/ref-wohnung-nachher-800.webp 800w, img/ref-wohnung-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Derselbe Wohnbereich nach der Räumung: leer und besenrein" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Wohnung</span><h3>Wohnungsräumung – vollständig geräumt</h3><p>Hausrat, Möbel und Textilien sortiert, Verwertbares angerechnet, der Rest fachgerecht entsorgt.</p></div></div>
     </div>
     <div class="refgrid three">
-<div class="refcard rv"><div class="imgs two"><figure><img src="img/ref-buero-vorher.webp" srcset="img/ref-buero-vorher-800.webp 800w, img/ref-buero-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Büro vor der Räumung mit Möbeln und Aktenbergen" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-buero-nachher.webp" srcset="img/ref-buero-nachher-800.webp 800w, img/ref-buero-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dasselbe Büro nach der Räumung, besenrein übergeben" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Büroauflösung Rhein-Main</h3><p>Schreibtische, Akten und Technik geräumt, Fläche besenrein übergeben.</p></div></div>
-<div class="refcard rv"><div class="imgs two"><figure><img src="img/ref-gewerbe.webp" srcset="img/ref-gewerbe-800.webp 800w, img/ref-gewerbe.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Geräumte Gewerbefläche mit Fensterfront" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-halle.webp" srcset="img/ref-halle-800.webp 800w, img/ref-halle.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Komplett geräumte Lagerhalle, Boden gekehrt" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Gewerbefläche und Halle</h3><p>Komplett geräumt, Boden gekehrt – bereit für Übergabe oder Neuvermietung.</p></div></div>
-<div class="refcard rv"><div class="imgs two"><figure><img src="img/ref-rueckbau.webp" srcset="img/ref-rueckbau-800.webp 800w, img/ref-rueckbau.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Zimmer mit entfernten Tapeten, vorbereitet für die Renovierung" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-decke.webp" srcset="img/ref-decke-800.webp 800w, img/ref-decke.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Abgehängte Decke demontiert, Räumung im Gang" loading="lazy" decoding="async"><span class="lbl">Während</span></figure></div><div class="txt"><span class="chip">Rückbau</span><h3>Rückbau vor der Renovierung</h3><p>Tapeten, Bodenbeläge und Deckenverkleidung entfernt – die Wohnung geht sauber an den Handwerker.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-buero-vorher.webp" srcset="img/ref-buero-vorher-800.webp 800w, img/ref-buero-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Büro vor der Räumung mit Möbeln und Aktenbergen" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-buero-nachher.webp" srcset="img/ref-buero-nachher-800.webp 800w, img/ref-buero-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dasselbe Büro nach der Räumung, besenrein übergeben" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Büroauflösung Rhein-Main</h3><p>Schreibtische, Akten und Technik geräumt, Fläche besenrein übergeben.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-gewerbe.webp" srcset="img/ref-gewerbe-800.webp 800w, img/ref-gewerbe.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Geräumte Gewerbefläche mit Fensterfront" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-halle.webp" srcset="img/ref-halle-800.webp 800w, img/ref-halle.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Komplett geräumte Lagerhalle, Boden gekehrt" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Gewerbefläche und Halle</h3><p>Komplett geräumt, Boden gekehrt – bereit für Übergabe oder Neuvermietung.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-rueckbau.webp" srcset="img/ref-rueckbau-800.webp 800w, img/ref-rueckbau.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Zimmer mit entfernten Tapeten, vorbereitet für die Renovierung" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-decke.webp" srcset="img/ref-decke-800.webp 800w, img/ref-decke.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Abgehängte Decke demontiert, Räumung im Gang" loading="lazy" decoding="async"><span class="lbl">Während</span></figure></div><div class="txt"><span class="chip">Rückbau</span><h3>Rückbau vor der Renovierung</h3><p>Tapeten, Bodenbeläge und Deckenverkleidung entfernt – die Wohnung geht sauber an den Handwerker.</p></div></div>
     </div>
     <div class="refgrid three">
-<div class="refcard rv"><div class="imgs one"><figure><img src="img/ref-container.webp" srcset="img/ref-container-800.webp 800w, img/ref-container.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Absetzcontainer mit sortiertem Bauschutt vor dem Objekt" loading="lazy" decoding="async"><span class="lbl">Entsorgung</span></figure></div><div class="txt"><span class="chip">Entsorgung</span><h3>Getrennt entsorgt, nachweisbar</h3><p>Bauschutt, Sperrmüll und Wertstoffe werden getrennt – auf Wunsch mit Entsorgungsnachweis.</p></div></div>
-<div class="refcard rv"><div class="imgs one"><figure><img src="img/ref-schrank.webp" srcset="img/ref-schrank-800.webp 800w, img/ref-schrank.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Massivholzschrank aus Weichholz, geprüft für die Wertanrechnung" loading="lazy" decoding="async"><span class="lbl">Wertanrechnung</span></figure></div><div class="txt"><span class="chip">Wertanrechnung</span><h3>Was Wert hat, senkt den Preis</h3><p>Massivholzmöbel, Antiquitäten und Elektrogeräte werden geprüft und auf den Festpreis angerechnet.</p></div></div>
-      <div class="refcard rv" style="display:flex;flex-direction:column;justify-content:center">
+<div class="refcard of-rv"><div class="imgs one"><figure><img src="img/ref-container.webp" srcset="img/ref-container-800.webp 800w, img/ref-container.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Absetzcontainer mit sortiertem Bauschutt vor dem Objekt" loading="lazy" decoding="async"><span class="lbl">Entsorgung</span></figure></div><div class="txt"><span class="chip">Entsorgung</span><h3>Getrennt entsorgt, nachweisbar</h3><p>Bauschutt, Sperrmüll und Wertstoffe werden getrennt – auf Wunsch mit Entsorgungsnachweis.</p></div></div>
+<div class="refcard of-rv"><div class="imgs one"><figure><img src="img/ref-schrank.webp" srcset="img/ref-schrank-800.webp 800w, img/ref-schrank.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Massivholzschrank aus Weichholz, geprüft für die Wertanrechnung" loading="lazy" decoding="async"><span class="lbl">Wertanrechnung</span></figure></div><div class="txt"><span class="chip">Wertanrechnung</span><h3>Was Wert hat, senkt den Preis</h3><p>Massivholzmöbel, Antiquitäten und Elektrogeräte werden geprüft und auf den Festpreis angerechnet.</p></div></div>
+      <div class="refcard of-rv" style="display:flex;flex-direction:column;justify-content:center">
         <div class="txt" style="padding:26px 18px">
           <span class="chip">Google-Bewertungen</span>
           <h3>Unsere Kunden bewerten uns öffentlich.</h3>
@@ -2103,7 +2131,7 @@ body.menu-open .mnav{padding-top:84px}
       </details>
       <details>
         <summary>Wie schnell können Sie räumen?</summary>
-        <p>In dringenden Fällen ist eine Räumung innerhalb von 24 Stunden möglich – je nach Auslastung, auch am Wochenende. Regulär ist die Besichtigung innerhalb weniger Tage machbar, die Räumung oft schon in der Folgewoche.</p>
+        <p>In dringenden Fällen ist eine Räumung innerhalb von 24 Stunden möglich – je nach Auslastung und Umfang. Regulär ist die Besichtigung innerhalb weniger Tage machbar, die Räumung oft schon in der Folgewoche.</p>
       </details>
       <details>
         <summary>Was passiert mit Wertgegenständen und Erinnerungsstücken?</summary>
@@ -3000,7 +3028,7 @@ const INDEX=1.00;
 const rv=[...document.querySelectorAll('.cards .card,.step,.check-item,.pane,.region-chips,.faq details')];
 rv.forEach(el=>el.classList.add('rv'));
 if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{e.target.classList.toggle('in',e.isIntersecting);}),{threshold:.12,rootMargin:'0px 0px -4% 0px'});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -4% 0px'});
   rv.forEach(el=>io.observe(el));
 }else{rv.forEach(el=>el.classList.add('in'));}
 
@@ -3077,6 +3105,27 @@ if(stepsEl&&'IntersectionObserver' in window){
     var q = a.getAttribute('data-quelle') || 'Seite';
     try{ sessionStorage.setItem('of_quelle', q); }catch(err){}
   }, true);
+})();
+/* Zahlenleiste und Referenzen sanft einblenden.
+   Nur wenn das hier wirklich läuft, wird überhaupt etwas versteckt. */
+(function(){
+  var els = [].slice.call(document.querySelectorAll('.of-rv'));
+  if(!els.length) return;
+  if(!('IntersectionObserver' in window)) return;   /* ohne Beobachter: alles sichtbar lassen */
+  document.documentElement.classList.add('js-rv');
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.08,rootMargin:'0px 0px -4% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+  /* Notbremse: was nach 4 Sekunden noch versteckt ist, wird sichtbar gemacht */
+  setTimeout(function(){
+    els.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+    });
+  }, 4000);
 })();
 /* Ablauf: Linie zeichnet sich, das OF-Logo fährt als Pfeilspitze mit */
 (function(){

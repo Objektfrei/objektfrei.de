@@ -1,0 +1,26 @@
+Objektfrei – Inhalt für den Ordner site/   (Stand 21.09.2026)
+============================================================
+
+Diese Dateien gehören 1:1 in das Verzeichnis site/ eures Repos:
+
+  index.html            Startseite (neu)
+  impressum.html · datenschutz.html · agb.html · widerruf.html
+  site.webmanifest
+  assets/               Favicon, App-Symbole, Schriften
+  img/                  Fotos als WebP, je zwei Größen
+
+Was eingestellt ist
+  - Formular sendet an  /anfrage.php
+  - Schriften liegen vollständig unter assets/fonts und werden vom
+    eigenen Server geladen. Keine Verbindung zu Google Fonts – so,
+    wie es in der Datenschutzerklärung steht.
+      archivo-var.ttf           Überschriften
+      instrument-sans-var.ttf   Fließtext
+      plexmono-400/500/600.ttf  Kleine Labels
+    Zusammen 408 KB, auf den benötigten Zeichensatz gekürzt.
+  - anfrage@objektfrei.de: Preisrechner, Anfragen, Bestätigung
+    info@objektfrei.de:    FAQ und Fußzeile (allgemeine Fragen)
+  - Jeder Button schreibt seine Herkunft in die Anfrage-Mail
+    (Feld "einstieg": Hero, Leistungen, Referenzen, FAQ, Schluss …).
+
+Nichts weiter zu tun – der Ordner ist vollständig.

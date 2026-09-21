@@ -1258,6 +1258,14 @@ body.rahmenmodus #foto-group{display:none}
    ============================================================ */
 .brand-mark{height:40px}
 .brand{font-size:20px;letter-spacing:.13em}
+/* Die Marke ist ein inline-flex mit gap – dadurch war der Abstand
+   Zeichen|OBJEKT exakt so gross wie OBJEKT|FREI (beide 12 px) und alles
+   las sich als drei gleichrangige Teile. Jetzt: Zeichen deutlich abgesetzt,
+   OBJEKT und FREI nur durch eine normale Wortluecke getrennt.            */
+.brand{gap:0}
+.brand .brand-mark{margin-right:18px}
+.brand>span{margin-left:.45em}
+@media(max-width:720px){.brand .brand-mark{margin-right:13px}}
 header{transition:background .25s ease,border-color .25s ease}
 .nav-tel{display:inline-flex;align-items:center}
 .nav-tel a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:14.5px;padding-right:24px;margin-right:2px;border-right:1px solid var(--line)}
@@ -1354,60 +1362,69 @@ body.at-top .brand-mark{filter:brightness(0) invert(1)}
 }
 
 /* ---------- Ablauf: Spur, die an der Scrollstrecke haengt ----------
-   Grundzustand = fertige Linie. Erst wenn das Skript laeuft, setzt es die
-   Klasse js-track und uebernimmt die Steuerung ueber die Variablen.      */
+   Linie bleibt bronze. Jeder Punkt wird gruen, sobald das Zeichen vorbei ist.
+   Am Ende wird das Zeichen selbst gruen und OBJEKT FREI schreibt sich dazu.
+   Grundzustand = fertig; erst das Skript setzt js-track und uebernimmt.     */
 .track{position:relative;height:54px;margin-bottom:26px}
 .track-line{position:absolute;left:5px;top:26px;height:2px;
-  width:var(--len,calc(100% - 175px));background:rgba(38,56,44,.14)}
+  width:var(--len,calc(100% - 230px));background:rgba(38,56,44,.14)}
 .track-fill{position:absolute;left:5px;top:26px;height:2px;
-  width:var(--w1,calc(100% - 175px));background:var(--rust)}
-.track-fill2{position:absolute;top:26px;height:2px;left:var(--g0,0px);width:var(--w2,0px);
-  background:var(--green)}
+  width:var(--w1,calc(100% - 230px));background:var(--rust)}
 .track-dot{position:absolute;top:19px;width:18px;height:18px;border-radius:50%;
-  background:var(--rust);border:4px solid var(--cream);box-shadow:0 0 0 1.5px var(--rust);
-  transition:background .25s ease,box-shadow .25s ease}
-.track-mark{position:absolute;top:8px;left:var(--mx,calc(100% - 175px));
-  display:flex;align-items:center;gap:11px}
+  background:var(--green);border:4px solid var(--cream);box-shadow:0 0 0 1.5px var(--green);
+  transition:background .3s ease,box-shadow .3s ease}
+.track-mark{position:absolute;top:8px;left:var(--mx,calc(100% - 230px));z-index:4;
+  display:flex;align-items:center;gap:12px;color:var(--green);transition:color .4s ease}
 .track-mark>svg{width:46px;height:36px;flex:none;display:block}
-.track-word{font-family:'Archivo',sans-serif;font-weight:700;font-size:21px;
-  letter-spacing:-.005em;color:var(--rust);white-space:nowrap;line-height:1}
-.track-word i{font-style:normal;transition:opacity .15s ease}
+.track-wort{font-family:'Archivo',sans-serif;font-weight:700;font-size:19px;
+  letter-spacing:.13em;white-space:nowrap;line-height:1}
+.track-wort i{font-style:normal;transition:opacity .18s ease}
+.track-wort .bt{color:var(--green)}
+.track-wort .rt{color:var(--rust)}
+.track-wort .lz{margin-left:.42em}
+/* Sobald das Skript laeuft */
 .track.js-track .track-dot{background:var(--cream);box-shadow:0 0 0 1.5px rgba(38,56,44,.28)}
-.track.js-track .track-dot.on{background:var(--rust);box-shadow:0 0 0 1.5px var(--rust)}
-.track.js-track .track-dot.gruen{background:var(--green);box-shadow:0 0 0 1.5px var(--green)}
-.track.js-track .track-word i{opacity:0}
-.track.js-track .track-word i.on{opacity:1}
+.track.js-track .track-dot.vorbei{background:var(--green);box-shadow:0 0 0 1.5px var(--green)}
+.track.js-track .track-mark{color:var(--rust)}
+.track.js-track.fertig .track-mark{color:var(--green)}
+.track.js-track .track-wort i{opacity:0}
+.track.js-track .track-wort i.on{opacity:1}
 @media(min-width:861px){.steps{border-top:0}.step{border-top:0;padding-top:0}.step .dot{display:none}}
 
 /* Am Handy laeuft dieselbe Spur senkrecht mit */
 .vtrack{display:none}
 @media(max-width:860px){
   .track{display:none}
-  .steps{position:relative;grid-template-columns:1fr;gap:0;padding-left:34px}
-  .steps::before{content:"";position:absolute;left:7px;top:7px;bottom:20px;width:2px;background:var(--rust);opacity:.45}
+  /* 42 statt 34: das wandernde Zeichen braucht Luft zum Text */
+  .steps{position:relative;grid-template-columns:1fr;gap:0;padding-left:42px}
+  .steps::before{content:"";position:absolute;left:11px;top:7px;bottom:20px;width:2px;background:var(--rust);opacity:.45}
   .step{border-top:0;border-left:0;padding:0 0 28px 0;position:relative}
   .step:last-child{padding-bottom:16px}
-  .step::after{content:"";position:absolute;left:-34px;top:3px;width:16px;height:16px;border-radius:50%;
+  .step::after{content:"";position:absolute;left:-42px;top:3px;width:16px;height:16px;border-radius:50%;
     background:var(--rust);border:4px solid var(--cream);box-shadow:0 0 0 1.5px var(--rust);
-    transition:background .25s ease,box-shadow .25s ease}
+    transition:background .3s ease,box-shadow .3s ease}
   .step::before{position:static}
   /* Skript laeuft: statische Linie raus, Spur rein */
-  .steps.js-track{padding-bottom:56px}
+  .steps.js-track{padding-bottom:62px}
   .steps.js-track::before{display:none}
   .steps.js-track .vtrack{display:block}
   .steps.js-track .step::after{background:var(--cream);box-shadow:0 0 0 1.5px rgba(38,56,44,.28)}
-  .steps.js-track .step.on::after{background:var(--rust);box-shadow:0 0 0 1.5px var(--rust)}
-  .steps.js-track .step.gruen::after{background:var(--green);box-shadow:0 0 0 1.5px var(--green)}
+  .steps.js-track .step.vorbei::after{background:var(--green);box-shadow:0 0 0 1.5px var(--green)}
   .vtrack{position:absolute;left:0;top:7px;bottom:0;width:0}
-  .vtrack-line{position:absolute;left:7px;top:0;width:2px;height:var(--len,0px);background:rgba(38,56,44,.14)}
-  .vtrack-fill{position:absolute;left:7px;top:0;width:2px;height:var(--w1,0px);background:var(--rust)}
-  .vtrack-fill2{position:absolute;left:7px;top:var(--g0,0px);width:2px;height:var(--w2,0px);background:var(--green)}
-  .vtrack-mark{position:absolute;left:-14px;top:var(--my,0px);display:flex;align-items:center;gap:10px}
+  /* 11px statt 7px: die Linie laeuft jetzt genau durch die Punktmitte */
+  .vtrack-line{position:absolute;left:11px;top:0;width:2px;height:var(--len,0px);background:rgba(38,56,44,.14)}
+  .vtrack-fill{position:absolute;left:11px;top:0;width:2px;height:var(--w1,0px);background:var(--rust)}
+  .vtrack-mark{position:absolute;left:-9px;top:var(--my,0px);z-index:5;
+    display:flex;align-items:center;gap:11px;color:var(--rust);transition:color .4s ease}
+  .steps.js-track.fertig .vtrack-mark{color:var(--green)}
   .vtrack-mark>svg{width:42px;height:33px;flex:none;display:block}
-  .vtrack-word{font-family:'Archivo',sans-serif;font-weight:700;font-size:19px;
-    color:var(--rust);white-space:nowrap;line-height:1}
-  .vtrack-word i{font-style:normal;opacity:0;transition:opacity .15s ease}
-  .vtrack-word i.on{opacity:1}
+  .vtrack-wort{font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;
+    letter-spacing:.13em;white-space:nowrap;line-height:1}
+  .vtrack-wort i{font-style:normal;opacity:0;transition:opacity .18s ease}
+  .vtrack-wort i.on{opacity:1}
+  .vtrack-wort .bt{color:var(--green)}
+  .vtrack-wort .rt{color:var(--rust)}
+  .vtrack-wort .lz{margin-left:.42em}
 }
 
 /* ---------- Zielgruppen mit Foto ---------- */
@@ -1538,6 +1555,20 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
   .check-item h3{flex:1 1 0;min-width:0;margin-bottom:0}
   .check-item p{flex:0 0 100%;box-sizing:border-box;padding-left:42px}
 }
+
+/* ---------- Sprungpunkt zum Preisrechner ----------
+   #rechner war ein leeres <span> als direktes Kind von .k-grid – und damit
+   ein Gitterfeld. Auf dem Rechner landete es in der linken Spalte UNTER dem
+   Text, also gut 1000 px unterhalb des Preisrechners. Jetzt haengt der Punkt
+   am oberen Rand des Blocks, ausserhalb des Gitters.                       */
+/* Nur dort noetig, wo .k-grid zwei Spalten hat. Am Handy steht der Punkt
+   ohnehin direkt vor dem Rechner – da soll er genau dort bleiben.        */
+@media(min-width:921px){
+  .k-grid{position:relative}
+  .k-grid>.anchor{position:absolute;top:0;left:0;width:0;height:0;pointer-events:none}
+}
+#rechner{scroll-margin-top:96px}
+@media(max-width:720px){#rechner{scroll-margin-top:78px}}
 
 /* ---------- Fußzeile ---------- */
 .foot-top{grid-template-columns:1.3fr 1fr 1fr .8fr}
@@ -1673,17 +1704,17 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       <h2>Von der Anfrage bis zur Übergabe in vier Schritten.</h2>
     </div>
     <div class="track" id="track" aria-hidden="true">
-      <span class="track-line"></span><span class="track-fill"></span><span class="track-fill2"></span>
+      <span class="track-line"></span><span class="track-fill"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*0 - 4px)"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*1 - 4px)"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*2 - 4px)"></span>
       <span class="track-dot" style="left:calc((100% + 20px)/4*3 - 4px)"></span>
-      <span class="track-mark"><svg viewBox="0 0 114 88" aria-hidden="true"><path fill="#A65621" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg><span class="track-word"><i>o</i><i>b</i><i>j</i><i>e</i><i>k</i><i>t</i><i>f</i><i>r</i><i>e</i><i>i</i></span></span>
+      <span class="track-mark"><svg viewBox="0 0 114 88" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg><span class="track-wort"><i class="bt">O</i><i class="bt">B</i><i class="bt">J</i><i class="bt">E</i><i class="bt">K</i><i class="bt">T</i><i class="rt lz">F</i><i class="rt">R</i><i class="rt">E</i><i class="rt">I</i></span></span>
     </div>
     <div class="steps">
       <div class="vtrack" aria-hidden="true">
-        <span class="vtrack-line"></span><span class="vtrack-fill"></span><span class="vtrack-fill2"></span>
-        <span class="vtrack-mark"><svg viewBox="0 0 114 88" aria-hidden="true"><path fill="#A65621" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg><span class="vtrack-word"><i>o</i><i>b</i><i>j</i><i>e</i><i>k</i><i>t</i><i>f</i><i>r</i><i>e</i><i>i</i></span></span>
+        <span class="vtrack-line"></span><span class="vtrack-fill"></span>
+        <span class="vtrack-mark"><svg viewBox="0 0 114 88" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M113.88 2.62 L59.62 2.62 L54.25 1.12 L52.00 0.75 L51.12 0.38 L50.88 0.00 L36.75 0.00 L36.38 0.50 L32.38 1.38 L27.12 3.12 L21.00 6.25 L16.75 9.25 L13.88 11.75 L10.12 15.75 L7.50 19.25 L5.12 23.12 L3.25 27.12 L1.25 33.50 L0.75 36.50 L0.50 37.12 L0.00 37.50 L0.00 51.38 L0.50 51.75 L0.75 52.38 L1.25 55.38 L3.12 61.12 L6.25 67.25 L9.12 71.38 L13.25 76.00 L19.12 80.75 L23.62 83.38 L28.50 85.50 L32.75 86.75 L35.12 87.12 L36.00 87.50 L36.25 87.88 L46.88 87.88 L47.00 79.75 L46.50 79.00 L41.00 79.00 L37.88 78.62 L34.00 77.75 L29.50 76.00 L26.12 74.12 L22.88 71.75 L20.25 69.25 L17.00 65.38 L15.12 62.50 L13.00 58.25 L11.12 52.38 L10.38 46.62 L10.38 41.88 L10.75 38.12 L11.88 33.25 L13.00 30.12 L16.12 24.12 L18.75 20.62 L22.12 17.12 L24.75 15.00 L27.62 13.12 L32.00 11.00 L35.12 10.00 L40.75 9.00 L46.38 9.00 L48.38 9.25 L52.50 10.12 L55.50 11.12 L60.12 13.38 L63.75 15.88 L67.12 19.00 L69.88 22.25 L72.00 25.50 L73.75 28.88 L75.75 34.50 L76.62 38.75 L76.50 39.62 L75.62 40.12 L66.50 40.12 L66.00 39.88 L65.62 39.38 L65.62 35.12 L64.88 31.75 L63.38 28.38 L61.75 25.88 L60.38 24.25 L58.00 22.12 L54.88 20.12 L51.25 18.75 L50.25 19.12 L50.25 87.88 L65.38 87.88 L65.62 86.62 L65.75 82.25 L66.88 81.12 L69.25 79.62 L72.75 76.75 L75.88 73.62 L77.75 71.38 L80.75 67.12 L82.62 63.75 L85.12 57.38 L85.00 56.62 L84.50 56.25 L75.50 56.25 L75.00 56.50 L74.38 57.25 L72.62 61.25 L70.50 64.75 L67.12 69.00 L66.50 69.50 L66.00 69.50 L65.62 69.12 L65.62 54.00 L66.12 53.25 L66.88 53.00 L106.00 53.12 L107.00 52.75 L107.38 51.88 L107.38 41.25 L106.75 40.25 L88.00 40.12 L87.00 39.38 L86.62 36.12 L84.62 28.62 L81.62 22.00 L79.75 19.00 L77.75 16.38 L77.88 15.75 L78.50 15.38 L113.88 15.38 Z"/></svg><span class="vtrack-wort"><i class="bt">O</i><i class="bt">B</i><i class="bt">J</i><i class="bt">E</i><i class="bt">K</i><i class="bt">T</i><i class="rt lz">F</i><i class="rt">R</i><i class="rt">E</i><i class="rt">I</i></span></span>
       </div>
       <div class="step"><span class="dot"></span>
         <h3>Anfrage</h3>
@@ -2244,11 +2275,11 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 <nav class="mnav" id="mnav" aria-label="Mobiles Menü">
     <a href="#leistungen">Leistungen</a>
     <a href="#ablauf">Ablauf</a>
-    <a href="#rechner">Preisrechner</a>
+    <a href="#rechner" data-quelle="Menü">Preisrechner</a>
     <a href="#bewertungen">Referenzen</a>
     <a href="#team">Über uns</a>
     <a href="#faq">FAQ</a>
-    <a class="mnav-cta" href="#rechner">Jetzt Preis berechnen</a>
+    <a class="mnav-cta" href="#rechner" data-quelle="Menü">Jetzt Preis berechnen</a>
   </nav>
 
 <!-- Mobile Action-Bar -->
@@ -3162,6 +3193,26 @@ if(stepsEl&&'IntersectionObserver' in window){
     });
   }, 4000);
 })();
+/* Rahmenvereinbarung: der Hinweiskasten wird erst nach dem Sprung sichtbar
+   und schiebt den Inhalt um seine Hoehe nach unten. Danach noch einmal
+   sauber ausrichten, damit der Kasten auch wirklich im Bild steht.        */
+(function(){
+  var knopf = document.getElementById('hvcta');
+  if(!knopf) return;
+  function ausrichten(){
+    var kasten = document.getElementById('rahmenbox');
+    if(!kasten || kasten.hidden) return;
+    var kopf = document.querySelector('header');
+    var h = kopf ? kopf.getBoundingClientRect().height : 70;
+    var y = kasten.getBoundingClientRect().top + window.pageYOffset - h - 18;
+    try { window.scrollTo({top:y, behavior:'smooth'}); } catch(e){ window.scrollTo(0,y); }
+  }
+  knopf.addEventListener('click', function(){
+    /* Der Sprung ueber den Anker laeuft weich – erst danach stimmen die Masse. */
+    setTimeout(ausrichten, 320);
+    setTimeout(ausrichten, 700);
+  });
+})();
 /* Ablauf: die Spur haengt an der Scrollstrecke.
    Sie startet erst, wenn der Bereich sichtbar ist, und laeuft rueckwaerts
    genau so weit zurueck, wie zurueckgescrollt wird.                        */
@@ -3174,9 +3225,9 @@ if(stepsEl&&'IntersectionObserver' in window){
 
   var dots    = track ? [].slice.call(track.querySelectorAll('.track-dot')) : [];
   var markH   = track ? track.querySelector('.track-mark') : null;
-  var lettH   = track ? [].slice.call(track.querySelectorAll('.track-word i')) : [];
+  var lettH   = track ? [].slice.call(track.querySelectorAll('.track-wort i')) : [];
   var markV   = vtrack ? vtrack.querySelector('.vtrack-mark') : null;
-  var lettV   = vtrack ? [].slice.call(vtrack.querySelectorAll('.vtrack-word i')) : [];
+  var lettV   = vtrack ? [].slice.call(vtrack.querySelectorAll('.vtrack-wort i')) : [];
   var stepEls = [].slice.call(steps.querySelectorAll('.step'));
 
   if(track) track.classList.add('js-track');
@@ -3184,21 +3235,15 @@ if(stepsEl&&'IntersectionObserver' in window){
 
   function klemm(v,a,b){ return v<a?a:(v>b?b:v); }
 
-  function zeichne(el, weg, viertel, pos, marke, letts, wandernd, senkrecht){
-    var bronze = Math.min(pos, viertel);
-    var gruen  = Math.max(0, pos - viertel);
+  function zeichne(el, weg, pos, letts, anteilWort, senkrecht){
     el.style.setProperty('--len', weg + 'px');
-    el.style.setProperty('--w1',  bronze + 'px');
-    el.style.setProperty('--g0',  viertel + 'px');
-    el.style.setProperty('--w2',  gruen + 'px');
+    el.style.setProperty('--w1',  pos + 'px');
     el.style.setProperty(senkrecht ? '--my' : '--mx', pos + 'px');
-    var anteil = weg > viertel ? klemm((pos - viertel) / (weg - viertel), 0, 1) : 0;
-    var n = Math.round(anteil * letts.length);
+    var n = Math.round(anteilWort * letts.length);
     for(var i=0;i<letts.length;i++) letts[i].classList.toggle('on', i < n);
   }
 
-  /* Wie weit ist ein Element durch das Fenster gewandert? 0 = noch unten, 1 = fertig.
-     Die Strecke ist so gewaehlt, dass die Spur fertig ist, solange sie noch gut im Bild steht. */
+  /* Wie weit ist ein Element durch das Fenster gewandert? 0 = noch unten, 1 = fertig. */
   function fortschritt(el, startAnteil, zusatz, mindest){
     var r  = el.getBoundingClientRect();
     var vh = window.innerHeight || 800;
@@ -3206,31 +3251,37 @@ if(stepsEl&&'IntersectionObserver' in window){
     return klemm((vh*startAnteil - r.top) / strecke, 0, 1);
   }
 
+  /* Erster Abschnitt: das Zeichen wandert. Zweiter: es steht, wird gruen,
+     und OBJEKT FREI schreibt sich Buchstabe fuer Buchstabe dazu.          */
+  var GRENZE = 0.78;
+  function wandern(p){ return klemm(p / GRENZE, 0, 1); }
+  function schreiben(p){ return klemm((p - GRENZE) / (1 - GRENZE), 0, 1); }
+
   function aktualisiere(){
     if(track && track.offsetParent){
-      var p = fortschritt(track, 0.92, 0, 0.55);
-      var mw  = markH.offsetWidth || 170;
+      var p = fortschritt(track, 0.92, 0, 0.62);
+      var mw  = markH.offsetWidth || 220;
       var weg = Math.max(1, track.clientWidth - mw - 5);
-      var d   = dots.map(function(x){ return klemm(x.offsetLeft + x.offsetWidth/2 - 5, 0, weg); });
-      var v4  = d.length > 3 ? d[3] : weg;
-      var pos = p * weg;
-      zeichne(track, weg, v4, pos, markH, lettH, true, false);
+      var pos = wandern(p) * weg;
+      var wort = schreiben(p);
+      zeichne(track, weg, pos, lettH, wort, false);
+      track.classList.toggle('fertig', wort > 0.02);
       for(var i=0;i<dots.length;i++){
-        dots[i].classList.toggle('on',    pos >= d[i] - 6);
-        dots[i].classList.toggle('gruen', i === 3 && pos >= d[3] - 6);
+        var dx = klemm(dots[i].offsetLeft + dots[i].offsetWidth/2 - 5, 0, weg);
+        dots[i].classList.toggle('vorbei', pos >= dx - 6);
       }
     }
     if(vtrack && vtrack.offsetParent){
-      var p = fortschritt(steps, 0.85, 0.15, 0.45);
+      var p2 = fortschritt(steps, 0.85, 0.15, 0.45);
       var mh  = markV.offsetHeight || 34;
-      var weg2 = Math.max(1, steps.clientHeight - 7 - mh - 6);
-      var d2  = stepEls.map(function(x){ return klemm(x.offsetTop + 4, 0, weg2); });
-      var w4  = d2.length > 3 ? d2[3] : weg2;
-      var pos2 = p * weg2;
-      zeichne(vtrack, weg2, w4, pos2, markV, lettV, true, true);
+      var weg2 = Math.max(1, steps.clientHeight - 7 - mh - 10);
+      var pos2 = wandern(p2) * weg2;
+      var wort2 = schreiben(p2);
+      zeichne(vtrack, weg2, pos2, lettV, wort2, true);
+      steps.classList.toggle('fertig', wort2 > 0.02);
       for(var k=0;k<stepEls.length;k++){
-        stepEls[k].classList.toggle('on',    pos2 >= d2[k] - 6);
-        stepEls[k].classList.toggle('gruen', k === 3 && pos2 >= d2[3] - 6);
+        var dy = klemm(stepEls[k].offsetTop + 4, 0, weg2);
+        stepEls[k].classList.toggle('vorbei', pos2 >= dy - 6);
       }
     }
   }

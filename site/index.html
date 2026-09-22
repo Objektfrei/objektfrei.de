@@ -4,14 +4,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrümpelung & Haushaltsauflösung Rhein-Main zum Festpreis | Objektfrei</title>
+<title>Entrümpelung &amp; Haushaltsauflösung Wiesbaden zum Festpreis</title>
+<link rel="canonical" href="https://objektfrei.de/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#24382F">
-<meta name="description" content="Entrümpelung, Haushaltsauflösung & Endreinigung im Rhein-Main-Gebiet: besenreine Übergabe zum garantierten Festpreis. Kostenlose Besichtigung, Preisspanne in 60 Sekunden online berechnen.">
+<meta name="description" content="Entrümpelung &amp; Haushaltsauflösung in Wiesbaden und im Rhein-Main-Gebiet: besenrein zum Festpreis. Kostenlose Besichtigung, Preis in 60 Sekunden berechnen.">
+<link rel="preload" href="assets/fonts/archivo-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-sans-var.ttf" as="font" type="font/ttf" crossorigin>
 <style>
 /* Schriften vom eigenen Server – keine Verbindung zu Google */
 @font-face{font-family:'Archivo';src:url('assets/fonts/archivo-var.ttf') format('truetype-variations');
@@ -55,17 +58,56 @@
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-    "opens": "08:00",
-    "closes": "18:00"
+    "opens": "07:00",
+    "closes": "19:00"
   },{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": "Saturday",
-    "opens": "09:00",
-    "closes": "14:00"
+    "opens": "08:30",
+    "closes": "16:00"
   }],
   "priceRange": "Festpreis nach kostenloser Besichtigung",
   "areaServed": ["Frankfurt am Main","Wiesbaden","Mainz","Darmstadt","Offenbach","Hanau","Bad Homburg","Rüsselsheim","Aschaffenburg","Rhein-Main-Gebiet"],
-  "knowsAbout": ["Entrümpelung","Haushaltsauflösung","Endreinigung","Messie-Räumung","Gewerberäumung"]
+  "knowsAbout": ["Entrümpelung","Haushaltsauflösung","Endreinigung","Messie-Räumung","Gewerberäumung"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "@id": "https://objektfrei.de/#telefon",
+    "contactType": "customer service",
+    "telephone": "+49 611 16889631",
+    "email": "anfrage@objektfrei.de",
+    "availableLanguage": ["de", "en", "ar"],
+    "areaServed": "DE",
+    "hoursAvailable": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:30",
+        "closes": "16:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "10:00",
+        "closes": "14:00"
+      }
+    ]
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Leistungen",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Entrümpelung",
+        "description": "Wohnungen, Keller, Dachböden und Garagen – besenrein zum Festpreis."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Haushaltsauflösung",
+        "description": "Komplette Auflösung inklusive Wertanrechnung und Entsorgungsnachweis."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Messie-Räumung",
+        "description": "Diskrete Intensivräumung mit Schutzausrüstung und fachgerechter Entsorgung."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gewerbe- und Betriebsauflösung",
+        "description": "Büros, Lager und Hallen – Räumung, Abtransport und besenreine Übergabe."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Endreinigung",
+        "description": "Besenreine oder nutzungsfertige Übergabe nach der Räumung."}}
+    ]
+  }
 }
 </script>
 <style>
@@ -1264,11 +1306,28 @@ body.rahmenmodus #foto-group{display:none}
 .brand .brand-mark{margin-right:18px}
 .brand>span{margin-left:.45em}
 @media(max-width:720px){.brand .brand-mark{margin-right:13px}}
-header{transition:background .25s ease,border-color .25s ease}
+header{transition:background-color .25s ease}
 .nav-tel{display:inline-flex;align-items:center}
 .nav-tel a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:14.5px;padding-right:24px;margin-right:2px;border-right:1px solid var(--line)}
 .nav-tel svg{flex:none}
 @media(max-width:1080px){.nav-tel{display:none}}
+/* ---------- Telefon in der Kopfzeile ---------- */
+.kopf-tel{display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  font-weight:600;font-size:14.5px;color:var(--green);white-space:nowrap;
+  padding:9px 15px;border:1px solid var(--line);border-radius:99px;margin-left:22px;
+  transition:background .18s ease,color .18s ease,border-color .18s ease}
+.kopf-tel svg{flex:none}
+.kopf-tel:hover{background:var(--green);color:var(--cream);border-color:var(--green)}
+.nav-links{margin-left:auto}
+body.at-top .kopf-tel{color:var(--cream);border-color:rgba(241,237,228,.45)}
+body.at-top .kopf-tel:hover{background:var(--cream);color:var(--green);border-color:var(--cream)}
+@media(max-width:860px){
+  .kopf-tel{margin-left:auto;margin-right:12px;padding:9px;border-radius:12px}
+  .kopf-tel span{display:none}
+  .kopf-tel svg{width:19px;height:19px}
+}
+body.menu-open .kopf-tel{color:var(--green);border-color:var(--line)}
+
 body.at-top header{background:transparent;border-bottom-color:transparent;backdrop-filter:none}
 body.at-top header .brand,body.at-top header .nav-links a,body.at-top .nav-tel a{color:var(--cream)}
 body.at-top header .brand span{color:#D08650}
@@ -1615,17 +1674,155 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 .f-note-warn{font-size:13.5px;line-height:1.45;color:#B3261E;font-weight:500;
   border-left:3px solid #B3261E;padding:2px 0 2px 12px;margin:0 0 16px}
 
+/* ---------- Bilder: width/height sind jetzt gesetzt ----------
+   Damit die Hoehenangabe die Layouthoehe nicht erzwingt, sobald die Breite
+   per CSS kommt. Bilder mit eigener Hoehenregel (.hero-bg, .k-bg, .pane-media img,
+   .region-bg, .diskret-bg) gewinnen ueber ihre Klassenselektoren.           */
+img{height:auto}
+
+/* ---------- Kontrast: fuenf Stellen lagen unter dem Mindestwert ----------
+   Gemessen gegen den jeweiligen Hintergrund, Zielwert 4,5:1.            */
+.eyebrow{color:#9A4F1E}                                   /* 4,2 -> 5,0 auf Creme */
+.dark .eyebrow,.kontakt .eyebrow,.diskret .eyebrow{color:#D68E5C}   /* 2,36 -> 4,7 */
+.card .tag{color:#D68E5C}                                 /* 3,07 -> 4,7 */
+.fstep-lbl{opacity:.72}                                   /* 3,09 -> 4,8 */
+.opt small{opacity:.7}                                    /* 3,90 -> 4,9 */
+.cta-contact a{color:var(--cream)}                        /* 2,36 -> 4,5 auf Bronze */
+.funnel .form-note{opacity:.75}                           /* 3,99 -> 4,9 */
+.nav-links a.active{opacity:1}                            /* 3,51 -> 4,5 */
+.protokoll .p-nr{opacity:.75}                             /* 3,56 -> 4,6 */
+.fp-grid .big-claim{opacity:1}                            /* 4,31 -> 5,3 */
+.swipe-hint{opacity:.75}                                  /* 4,43 -> passt */
+
 /* ---------- Fußzeile ---------- */
 .foot-top{grid-template-columns:1.3fr 1fr 1fr .8fr}
 .foot-col a,.foot-col span.fc{display:flex;align-items:center;gap:9px}
 @media(max-width:760px){.foot-top{grid-template-columns:1fr}}
 
+/* ---------- Erreichbarkeit: Einsatz / Telefon / rund um die Uhr ---------- */
+.k-zeiten{margin-top:14px;border:1px solid var(--line-light);border-radius:12px;
+  background:rgba(241,237,228,.04);padding:4px 16px}
+.kz-row{display:flex;gap:14px;align-items:baseline;padding:11px 0;
+  border-top:1px solid rgba(241,237,228,.10)}
+.kz-row:first-child{border-top:0}
+.kz-l{flex:0 0 108px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.13em;text-transform:uppercase;opacity:.72}
+.kz-v{font-size:14px;line-height:1.45}
+.kz-v b{font-weight:600}
+@media(max-width:520px){
+  .kz-row{flex-direction:column;gap:3px;padding:10px 0}
+  .kz-l{flex:none}
+}
+
+/* ---------- Einwilligungsbanner ---------- */
+.cbanner{position:fixed;left:0;right:0;bottom:0;z-index:70;
+  background:var(--green-deep);color:var(--cream);
+  border-top:2px solid var(--rust);
+  padding:18px 20px calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -20px 40px -24px rgba(0,0,0,.8);
+  transform:translateY(100%);transition:transform .32s ease}
+.cbanner.an{transform:translateY(0)}
+.cb-in{max-width:var(--max);margin:0 auto;display:flex;gap:22px;
+  align-items:center;flex-wrap:wrap}
+.cb-txt{flex:1 1 380px;font-size:14px;line-height:1.6;opacity:.94}
+.cb-txt b{font-weight:600}
+.cb-txt a{color:#D08650;text-decoration:underline;text-underline-offset:2px}
+.cb-btns{display:flex;gap:10px;flex:0 0 auto}
+/* Ablehnen und Akzeptieren sind bewusst gleich gross und gleich auffaellig –
+   ein Banner, das nur den Zustimmen-Knopf betont, ist in Deutschland
+   abmahnfaehig. */
+.cb-btn{font-family:'Archivo',sans-serif;font-weight:600;font-size:14.5px;
+  padding:12px 22px;border-radius:99px;cursor:pointer;border:2px solid var(--cream);
+  background:none;color:var(--cream);min-width:132px;transition:background .18s ease,color .18s ease}
+.cb-btn:hover{background:var(--cream);color:var(--green-deep)}
+.cb-btn.ja{background:var(--rust);border-color:var(--rust);color:#fff}
+.cb-btn.ja:hover{background:var(--rust-soft);border-color:var(--rust-soft);color:#fff}
+@media(max-width:720px){
+  .cbanner{padding:16px 18px calc(16px + env(safe-area-inset-bottom))}
+  .cb-in{gap:14px}
+  .cb-txt{flex:1 1 100%;font-size:13.5px}
+  .cb-btns{flex:1 1 100%}
+  .cb-btn{flex:1 1 0;min-width:0;padding:13px 10px}
+}
+
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet eine Entrümpelung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Das hängt von Größe, Füllmenge und Zugänglichkeit des Objekts ab. Unser Preisrechner im Anfrageformular zeigt Ihnen sofort eine grobe Spanne. Den schriftlichen Festpreis erhalten Sie nach der kostenlosen Besichtigung – er gilt, solange die Angaben vollständig sind. Verwertbare Gegenstände rechnen wir an und senken so Ihre Kosten."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Arbeiten Sie mit Hausverwaltungen auf Rahmenvereinbarung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Wir hinterlegen feste Preise für Ihre wiederkehrenden Fälle – Wohnungsräumung nach Mieterwechsel, Kellerentrümpelung, Objektübergabe. Damit entfällt das Einholen von Vergleichsangeboten bei jedem einzelnen Auftrag. Ab einem vereinbarten Mindestvolumen liegen die Konditionen 10 % unter unserer Listenpreisliste. Sie erhalten eine Rückmeldung binnen vier Stunden an Werktagen, einen Besichtigungstermin binnen 48 Stunden und eine prüffähige Rechnung mit Objekt- und Kostenstellenangabe, auf Wunsch als monatliche Sammelrechnung."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ist die Reinigung bei einer Entrümpelung inklusive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die besenreine Übergabe ist immer im Festpreis enthalten : Wir räumen vollständig, kehren durch und nehmen den Bauschutt mit. Eine Endreinigung geht darüber hinaus – Böden werden gewischt, Bad und Küche gründlich gereinigt, das Objekt ist danach übergabe- oder besichtigungsfertig. Diese Zusatzleistung können Sie im Preisrechner direkt mit auswählen; sie wird transparent im Preis ausgewiesen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie schnell können Sie räumen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In dringenden Fällen ist eine Räumung innerhalb von 24 Stunden möglich – je nach Auslastung und Umfang. Regulär ist die Besichtigung innerhalb weniger Tage machbar, die Räumung oft schon in der Folgewoche."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was passiert mit Wertgegenständen und Erinnerungsstücken?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vor der Räumung klären wir gemeinsam, was gesichert werden soll. Dokumente, Fotos und persönliche Gegenstände legen wir grundsätzlich beiseite. Verwertbares wird angerechnet und reduziert den Festpreis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ist die kostenlose Besichtigung wirklich unverbindlich?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Sie erhalten nach der Besichtigung ein Festpreis-Angebot und entscheiden in Ruhe. Es entstehen keine Kosten und keine Verpflichtungen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Arbeiten Sie auch diskret?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolut. Gerade bei Messie- und Extremräumungen kommen wir auf Wunsch mit neutralen Fahrzeugen und ohne erkennbare Firmenkleidung. Verschwiegenheit ist für uns selbstverständlich."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Erhalte ich Nachweise für die Entsorgung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Auf Wunsch dokumentieren wir vorher/nachher mit Fotos und stellen Entsorgungsnachweise aus – besonders für Hausverwaltungen und Eigentümer wichtig."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top"><img src="data:image/png;base64,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" alt="" class="brand-mark">OBJEKT<span>FREI</span></a>
+    <a class="brand" href="#top"><img src="assets/logo-mark.svg" width="114" height="88" alt="" class="brand-mark" decoding="async">OBJEKT<span>FREI</span></a>
     <ul class="nav-links">
       <li><a href="#leistungen">Leistungen</a></li>
       <li><a href="#ablauf">Ablauf</a></li>
@@ -1634,7 +1831,8 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       <li><a href="#faq">FAQ</a></li>
       <li class="cta-li"><a class="nav-phone" id="navcta" href="#rechner" data-quelle="Kopfzeile">Preis berechnen</a></li>
     </ul>
-    <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="kopf-tel" href="tel:+4961116889631" data-quelle="Kopfzeile-Telefon" aria-label="Objektfrei anrufen: 0611 16889631"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>0611 16889631</span></a>
+      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   
 </header>
@@ -1643,7 +1841,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="start">
-  <div class="hero-huelle"><img src="img/hero-team.webp" srcset="img/hero-team-1200.webp 1200w, img/hero-team.webp 1400w" sizes="100vw" alt="Das Objektfrei-Team trägt Transportkisten zum Transporter" class="hero-bg" fetchpriority="high" decoding="async">
+  <div class="hero-huelle"><img src="img/hero-team.webp" srcset="img/hero-team-1200.webp 1200w, img/hero-team.webp 1400w" sizes="100vw" alt="Das Objektfrei-Team trägt Transportkisten zum Transporter" class="hero-bg" fetchpriority="high" decoding="async" width="1800" height="1200">
   <div class="hero-shade"></div></div>
   <div class="wrap hero-grid">
     <div>
@@ -1806,7 +2004,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
     </div>
     <div class="split">
       <div class="pane tintgreen">
-        <div class="pane-media"><img src="img/privat.webp" srcset="img/privat-800.webp 800w, img/privat.webp 1400w" sizes="(max-width:860px) 100vw, 560px" alt="Zwei Mitarbeiter tragen eine antike Kommode mit Tragegurten durchs Treppenhaus" loading="lazy" decoding="async"></div>
+        <div class="pane-media"><img src="img/privat.webp" srcset="img/privat-800.webp 800w, img/privat.webp 1400w" sizes="(max-width:860px) 100vw, 560px" alt="Zwei Mitarbeiter tragen eine antike Kommode mit Tragegurten durchs Treppenhaus" loading="lazy" decoding="async" width="1200" height="675"></div>
         <div class="pane-body">
         <span class="eyebrow">Privatkunden</span>
         <h3>Wenn ein Kapitel endet, übernehmen wir den Rest.</h3>
@@ -1821,7 +2019,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
         </div>
       </div>
       <div class="pane">
-        <div class="pane-media"><img src="img/hausverwaltung.webp" srcset="img/hausverwaltung-800.webp 800w, img/hausverwaltung.webp 1400w" sizes="(max-width:860px) 100vw, 560px" alt="Sackkarre mit beschrifteten Kisten für Sonderabfall, Metall, Elektro und Wertstoffe" loading="lazy" decoding="async"></div>
+        <div class="pane-media"><img src="img/hausverwaltung.webp" srcset="img/hausverwaltung-800.webp 800w, img/hausverwaltung.webp 1400w" sizes="(max-width:860px) 100vw, 560px" alt="Sackkarre mit beschrifteten Kisten für Sonderabfall, Metall, Elektro und Wertstoffe" loading="lazy" decoding="async" width="1200" height="675"></div>
         <div class="pane-body">
         <span class="eyebrow">Hausverwaltungen &amp; Eigentümer</span>
         <h3>Damit die Rückfrage gar nicht erst kommt.</h3>
@@ -1847,7 +2045,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 
 <!-- ============ KONTAKT ============ -->
 <section class="kontakt" id="kontakt">
-  <div class="k-huelle"><img src="img/rechner.webp" srcset="img/rechner-900.webp 900w, img/rechner.webp 1400w" sizes="100vw" alt="Einsatzleiter füllt gemeinsam mit dem Kunden das Übergabeprotokoll aus" class="k-bg" loading="lazy" decoding="async">
+  <div class="k-huelle"><img src="img/rechner.webp" srcset="img/rechner-900.webp 900w, img/rechner.webp 1400w" sizes="100vw" alt="Einsatzleiter füllt gemeinsam mit dem Kunden das Übergabeprotokoll aus" class="k-bg" loading="lazy" decoding="async" width="1000" height="933">
   <div class="k-shade"></div></div>
   <div class="wrap k-grid">
     <div class="k-info">
@@ -1857,16 +2055,16 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       <div class="estimate demo" id="demoresult">
         <div class="demo-top"><span class="est-lbl">So sieht Ihr Ergebnis aus</span><span class="demo-bsp">Beispiel</span></div>
         <div class="demo-body" id="demobody">
-        <span class="est-val"><span class="von">ca.</span><span id="demoval">2.850 – 3.950 €</span></span>
+        <span class="est-val"><span class="von">ca.</span><span id="demoval">1.300 – 1.750 €</span></span>
         <div class="est-scale">
-          <div class="est-bar"><i id="demofill" style="left:48%;width:18%"></i></div>
-          <div class="est-ticks"><span>0 €</span><span id="demomid">3.000 €</span><span id="demomax">6.000 €</span></div>
+          <div class="est-bar"><i id="demofill" style="left:52%;width:18%"></i></div>
+          <div class="est-ticks"><span>0 €</span><span id="demomid">1.250 €</span><span id="demomax">2.500 €</span></div>
         </div>
         <div class="est-chips" id="demochips">
-          <span class="basis">Basis: Wohnung · 3 Zimmer</span>
+          <span class="basis">Basis: Wohnung · 1 Zimmer</span>
           <span class="minus">− Wertanrechnung möglich</span>
         </div>
-        <p class="est-note"><span id="demonote">Beispiel einer 3-Zimmer-Wohnung, normal gefüllt – inkl. MwSt.</span> Rechts beantworten Sie vier kurze Fragen – dann steht hier Ihre eigene Spanne.</p>
+        <p class="est-note"><span id="demonote">Beispiel: 1-Zimmer-Wohnung, wenig möbliert – inkl. Entsorgung, Anfahrt und MwSt.</span> Rechts beantworten Sie vier kurze Fragen – dann steht hier Ihre eigene Spanne.</p>
         </div>
       </div>
     </div>
@@ -2098,6 +2296,11 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
           <span><span class="kc-lbl">Telefon</span><br><span class="kc-val">0611 16889631</span></span>
         </a>
       </div>
+      <div class="k-zeiten">
+        <div class="kz-row"><span class="kz-l">Einsätze</span><span class="kz-v"><b>Mo&ndash;Fr 07:00&ndash;19:00</b> &middot; Sa 08:30&ndash;16:00</span></div>
+        <div class="kz-row"><span class="kz-l">Telefonisch</span><span class="kz-v"><b>Mo&ndash;Fr 09:30&ndash;16:00</b> &middot; Sa 10:00&ndash;14:00</span></div>
+        <div class="kz-row"><span class="kz-l">Rechner &amp; Mail</span><span class="kz-v"><b>rund um die Uhr</b> &middot; Antwort werktags innerhalb von 4&nbsp;Stunden</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -2111,17 +2314,17 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       <p>Wir dokumentieren jeden Einsatz mit Vorher-/Nachher-Aufnahmen – eigene Fotos aus echten Objekten, keine Symbolbilder. Nach Abschluss bitten wir jeden Kunden um eine Google-Bewertung.</p>
     </div>
     <div class="refgrid">
-<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-brand-vorher.webp" srcset="img/ref-brand-vorher-800.webp 800w, img/ref-brand-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Küche nach einem Brand: verrußte Wand, beschädigte Möbel und Hausrat" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-brand-nachher.webp" srcset="img/ref-brand-nachher-800.webp 800w, img/ref-brand-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dieselbe Küchenwand nach Demontage und Entsorgung des Brandschutts" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Brandschaden</span><h3>Küche nach Brand – geräumt und rückgebaut</h3><p>Einbauküche demontiert, Brandschutt entsorgt, Raum bereit für die Sanierung. Eigene Aufnahmen, kein Symbolbild.</p></div></div>
-<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-wohnung-vorher.webp" srcset="img/ref-wohnung-vorher-800.webp 800w, img/ref-wohnung-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Vollgestelltes Wohnzimmer vor der Haushaltsauflösung" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-wohnung-nachher.webp" srcset="img/ref-wohnung-nachher-800.webp 800w, img/ref-wohnung-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Derselbe Wohnbereich nach der Räumung: leer und besenrein" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Wohnung</span><h3>Wohnungsräumung – vollständig geräumt</h3><p>Hausrat, Möbel und Textilien sortiert, Verwertbares angerechnet, der Rest fachgerecht entsorgt.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-brand-vorher.webp" srcset="img/ref-brand-vorher-800.webp 800w, img/ref-brand-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Küche nach einem Brand: verrußte Wand, beschädigte Möbel und Hausrat" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-brand-nachher.webp" srcset="img/ref-brand-nachher-800.webp 800w, img/ref-brand-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dieselbe Küchenwand nach Demontage und Entsorgung des Brandschutts" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Brandschaden</span><h3>Küche nach Brand – geräumt und rückgebaut</h3><p>Einbauküche demontiert, Brandschutt entsorgt, Raum bereit für die Sanierung. Eigene Aufnahmen, kein Symbolbild.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-wohnung-vorher.webp" srcset="img/ref-wohnung-vorher-800.webp 800w, img/ref-wohnung-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Vollgestelltes Wohnzimmer vor der Haushaltsauflösung" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-wohnung-nachher.webp" srcset="img/ref-wohnung-nachher-800.webp 800w, img/ref-wohnung-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Derselbe Wohnbereich nach der Räumung: leer und besenrein" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Wohnung</span><h3>Wohnungsräumung – vollständig geräumt</h3><p>Hausrat, Möbel und Textilien sortiert, Verwertbares angerechnet, der Rest fachgerecht entsorgt.</p></div></div>
     </div>
     <div class="refgrid three">
-<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-buero-vorher.webp" srcset="img/ref-buero-vorher-800.webp 800w, img/ref-buero-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Büro vor der Räumung mit Möbeln und Aktenbergen" loading="lazy" decoding="async"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-buero-nachher.webp" srcset="img/ref-buero-nachher-800.webp 800w, img/ref-buero-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dasselbe Büro nach der Räumung, besenrein übergeben" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Büroauflösung Rhein-Main</h3><p>Schreibtische, Akten und Technik geräumt, Fläche besenrein übergeben.</p></div></div>
-<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-gewerbe.webp" srcset="img/ref-gewerbe-800.webp 800w, img/ref-gewerbe.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Geräumte Gewerbefläche mit Fensterfront" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-halle.webp" srcset="img/ref-halle-800.webp 800w, img/ref-halle.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Komplett geräumte Lagerhalle, Boden gekehrt" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Gewerbefläche und Halle</h3><p>Komplett geräumt, Boden gekehrt – bereit für Übergabe oder Neuvermietung.</p></div></div>
-<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-rueckbau.webp" srcset="img/ref-rueckbau-800.webp 800w, img/ref-rueckbau.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Zimmer mit entfernten Tapeten, vorbereitet für die Renovierung" loading="lazy" decoding="async"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-decke.webp" srcset="img/ref-decke-800.webp 800w, img/ref-decke.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Abgehängte Decke demontiert, Räumung im Gang" loading="lazy" decoding="async"><span class="lbl">Während</span></figure></div><div class="txt"><span class="chip">Rückbau</span><h3>Rückbau vor der Renovierung</h3><p>Tapeten, Bodenbeläge und Deckenverkleidung entfernt – die Wohnung geht sauber an den Handwerker.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-buero-vorher.webp" srcset="img/ref-buero-vorher-800.webp 800w, img/ref-buero-vorher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Büro vor der Räumung mit Möbeln und Aktenbergen" loading="lazy" decoding="async" width="1000" height="750"><span class="lbl">Vorher</span></figure><figure><img src="img/ref-buero-nachher.webp" srcset="img/ref-buero-nachher-800.webp 800w, img/ref-buero-nachher.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Dasselbe Büro nach der Räumung, besenrein übergeben" loading="lazy" decoding="async" width="1000" height="750"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Büroauflösung Rhein-Main</h3><p>Schreibtische, Akten und Technik geräumt, Fläche besenrein übergeben.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-gewerbe.webp" srcset="img/ref-gewerbe-800.webp 800w, img/ref-gewerbe.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Geräumte Gewerbefläche mit Fensterfront" loading="lazy" decoding="async" width="1000" height="750"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-halle.webp" srcset="img/ref-halle-800.webp 800w, img/ref-halle.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Komplett geräumte Lagerhalle, Boden gekehrt" loading="lazy" decoding="async" width="1000" height="750"><span class="lbl after">Nachher</span></figure></div><div class="txt"><span class="chip">Gewerbe</span><h3>Gewerbefläche und Halle</h3><p>Komplett geräumt, Boden gekehrt – bereit für Übergabe oder Neuvermietung.</p></div></div>
+<div class="refcard of-rv"><div class="imgs two"><figure><img src="img/ref-rueckbau.webp" srcset="img/ref-rueckbau-800.webp 800w, img/ref-rueckbau.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Zimmer mit entfernten Tapeten, vorbereitet für die Renovierung" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl after">Nachher</span></figure><figure><img src="img/ref-decke.webp" srcset="img/ref-decke-800.webp 800w, img/ref-decke.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Abgehängte Decke demontiert, Räumung im Gang" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl">Während</span></figure></div><div class="txt"><span class="chip">Rückbau</span><h3>Rückbau vor der Renovierung</h3><p>Tapeten, Bodenbeläge und Deckenverkleidung entfernt – die Wohnung geht sauber an den Handwerker.</p></div></div>
     </div>
     <div class="refgrid three">
-<div class="refcard of-rv"><div class="imgs one"><figure><img src="img/ref-container.webp" srcset="img/ref-container-800.webp 800w, img/ref-container.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Absetzcontainer mit sortiertem Bauschutt vor dem Objekt" loading="lazy" decoding="async"><span class="lbl">Entsorgung</span></figure></div><div class="txt"><span class="chip">Entsorgung</span><h3>Getrennt entsorgt, nachweisbar</h3><p>Bauschutt, Sperrmüll und Wertstoffe werden getrennt – auf Wunsch mit Entsorgungsnachweis.</p></div></div>
-<div class="refcard of-rv"><div class="imgs one"><figure><img src="img/ref-schrank.webp" srcset="img/ref-schrank-800.webp 800w, img/ref-schrank.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Massivholzschrank aus Weichholz, geprüft für die Wertanrechnung" loading="lazy" decoding="async"><span class="lbl">Wertanrechnung</span></figure></div><div class="txt"><span class="chip">Wertanrechnung</span><h3>Was Wert hat, senkt den Preis</h3><p>Massivholzmöbel, Antiquitäten und Elektrogeräte werden geprüft und auf den Festpreis angerechnet.</p></div></div>
+<div class="refcard of-rv"><div class="imgs one"><figure><img src="img/ref-container.webp" srcset="img/ref-container-800.webp 800w, img/ref-container.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Absetzcontainer mit sortiertem Bauschutt vor dem Objekt" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl">Entsorgung</span></figure></div><div class="txt"><span class="chip">Entsorgung</span><h3>Getrennt entsorgt, nachweisbar</h3><p>Bauschutt, Sperrmüll und Wertstoffe werden getrennt – auf Wunsch mit Entsorgungsnachweis.</p></div></div>
+<div class="refcard of-rv"><div class="imgs one"><figure><img src="img/ref-schrank.webp" srcset="img/ref-schrank-800.webp 800w, img/ref-schrank.webp 1400w" sizes="(max-width:860px) 100vw, 380px" alt="Massivholzschrank aus Weichholz, geprüft für die Wertanrechnung" loading="lazy" decoding="async" width="1200" height="900"><span class="lbl">Wertanrechnung</span></figure></div><div class="txt"><span class="chip">Wertanrechnung</span><h3>Was Wert hat, senkt den Preis</h3><p>Massivholzmöbel, Antiquitäten und Elektrogeräte werden geprüft und auf den Festpreis angerechnet.</p></div></div>
       <div class="refcard of-rv" style="display:flex;flex-direction:column;justify-content:center">
         <div class="txt" style="padding:26px 18px">
           <span class="chip">Google-Bewertungen</span>
@@ -2150,15 +2353,15 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       </div>
       <div class="team-grid">
         <figure class="portrait wide">
-          <img src="img/team.webp" srcset="img/team-800.webp 800w, img/team.webp 1400w" sizes="(max-width:920px) 100vw, 520px" alt="Das Objektfrei-Team vor dem Transporter" loading="lazy" decoding="async">
+          <img src="img/team.webp" srcset="img/team-800.webp 800w, img/team.webp 1400w" sizes="(max-width:920px) 100vw, 520px" alt="Das Objektfrei-Team vor dem Transporter" loading="lazy" decoding="async" width="1200" height="900">
           <figcaption><strong>Das Objektfrei-Team</strong><br>Im Einsatz im gesamten Rhein-Main-Gebiet</figcaption>
         </figure>
         <figure class="portrait">
-          <img src="img/sandra.webp" srcset="img/sandra-500.webp 500w, img/sandra.webp 1400w" sizes="(max-width:920px) 50vw, 250px" alt="Sandra Löhmann, Gründerin und Geschäftsleitung von Objektfrei" loading="lazy" decoding="async">
+          <img src="img/sandra.webp" srcset="img/sandra-500.webp 500w, img/sandra.webp 1400w" sizes="(max-width:920px) 50vw, 250px" alt="Sandra Löhmann, Gründerin und Geschäftsleitung von Objektfrei" loading="lazy" decoding="async" width="800" height="1000">
           <figcaption><strong>Sandra Löhmann</strong><br>Gründerin &amp; Geschäftsleitung</figcaption>
         </figure>
         <figure class="portrait">
-          <img src="img/kaisan.webp" srcset="img/kaisan-500.webp 500w, img/kaisan.webp 1400w" sizes="(max-width:920px) 50vw, 250px" alt="Kaisan Nashwan, Mitgründer und Einsatzleitung von Objektfrei" loading="lazy" decoding="async">
+          <img src="img/kaisan.webp" srcset="img/kaisan-500.webp 500w, img/kaisan.webp 1400w" sizes="(max-width:920px) 50vw, 250px" alt="Kaisan Nashwan, Mitgründer und Einsatzleitung von Objektfrei" loading="lazy" decoding="async" width="800" height="1000">
           <figcaption><strong>Kaisan Nashwan</strong><br>Mitgründer &amp; Einsatzleitung</figcaption>
         </figure>
       </div>
@@ -2168,7 +2371,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 
 <!-- ============ DISKRETION ============ -->
 <section class="diskret">
-  <img src="img/extrem.webp" srcset="img/extrem-900.webp 900w, img/extrem.webp 1400w" sizes="100vw" alt="" class="diskret-bg" loading="lazy" decoding="async">
+  <img src="img/extrem.webp" srcset="img/extrem-900.webp 900w, img/extrem.webp 1400w" sizes="100vw" alt="" class="diskret-bg" loading="lazy" decoding="async" width="1400" height="933">
   <div class="diskret-shade"></div>
   <div class="wrap">
     <span class="eyebrow">Extremräumungen</span>
@@ -2203,7 +2406,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 
 <!-- ============ EINSATZGEBIET ============ -->
 <section class="region region-dark">
-  <img src="img/region.webp" srcset="img/region-900.webp 900w, img/region.webp 1400w" sizes="100vw" alt="Übergabe an der Haustür: Handschlag mit dem Kunden nach der Räumung" class="region-bg" loading="lazy" decoding="async">
+  <img src="img/region.webp" srcset="img/region-900.webp 900w, img/region.webp 1400w" sizes="100vw" alt="Übergabe an der Haustür: Handschlag mit dem Kunden nach der Räumung" class="region-bg" loading="lazy" decoding="async" width="1230" height="933">
   <div class="region-shade"></div>
   <div class="wrap">
     <div class="region-inner">
@@ -2225,7 +2428,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       <span class="eyebrow">Häufige Fragen</span>
       <h2>Klarheit vor der ersten Frage.</h2>
       <p>Ihre Frage ist nicht dabei? Schreiben Sie uns – wir nehmen uns Zeit.</p>
-      <a class="btn btn-outline" href="mailto:info@objektfrei.de?subject=Frage%20%C3%BCber%20objektfrei.de%20%E2%80%93%20FAQ"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>anfrage@objektfrei.de</a>
+      <a class="btn btn-outline" href="mailto:info@objektfrei.de?subject=Frage%20%C3%BCber%20objektfrei.de%20%E2%80%93%20FAQ"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>info@objektfrei.de</a>
     </div>
     <div class="faq">
       <details>
@@ -2289,7 +2492,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <img src="data:image/png;base64,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" alt="Objektfrei Logo" class="foot-mark">
+        <img src="assets/logo-mark.svg" width="114" height="88" alt="Objektfrei Logo" class="foot-mark" decoding="async">
         <p>Räumung, Reinigung &amp; Spezialdienste<br>im gesamten Rhein-Main-Gebiet.</p>
       </div>
       <div class="foot-col">
@@ -2301,7 +2504,7 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
       <div class="foot-col">
         <span class="foot-h">Kontakt</span>
         <a href="mailto:info@objektfrei.de?subject=Frage%20%C3%BCber%20objektfrei.de%20%E2%80%93%20Fu%C3%9Fzeile"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>info@objektfrei.de</a>
-        <span class="fc" style="opacity:.8;font-size:14.5px;padding:5px 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Bahnhofstraße 42, 65185 Wiesbaden</span>
+        <span class="fc" style="opacity:.8;font-size:14.5px;padding:5px 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Wiesbaden &amp; Rhein-Main-Gebiet</span>
         <a href="#rechner" data-quelle="Fußzeile">Kostenlose Besichtigung anfragen</a>
       </div>
     </div>
@@ -2312,10 +2515,27 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
         <a href="datenschutz.html">Datenschutz</a>
         <a href="agb.html">AGB</a>
         <a href="widerruf.html">Widerruf</a>
+        <a href="#" id="cbneu" hidden>Cookie-Einstellungen</a>
       </nav>
     </div>
   </div>
 </footer>
+
+
+<div class="cbanner" id="cbanner" role="dialog" aria-live="polite"
+     aria-label="Einwilligung in die Messung" hidden>
+  <div class="cb-in">
+    <p class="cb-txt"><b>Dürfen wir messen, welche Anzeige zu Ihnen geführt hat?</b><br>
+      Dafür setzt Google ein Cookie. Sie können ablehnen – die Seite funktioniert
+      vollständig weiter, der Preisrechner ebenso. Ohne Ihre Zustimmung baut diese
+      Seite keine Verbindung zu Google auf.
+      <a href="datenschutz.html">Mehr in der Datenschutzerklärung</a></p>
+    <div class="cb-btns">
+      <button type="button" class="cb-btn" id="cbnein">Ablehnen</button>
+      <button type="button" class="cb-btn ja" id="cbja">Akzeptieren</button>
+    </div>
+  </div>
+</div>
 
 <nav class="mnav" id="mnav" aria-label="Mobiles Menü">
     <a href="#leistungen">Leistungen</a>
@@ -2340,6 +2560,93 @@ html.js-rv .of-rv.in{opacity:1;transform:none}
 //                      (bei Web3Forms zusaetzlich access_key in data ergaenzen)
 // ==========================================================
 const FORM_ENDPOINT='/anfrage.php';
+
+// ==========================================================
+// MESSUNG – hier die Kennungen aus dem Google-Ads-Konto eintragen.
+// Tools und Einstellungen -> Messung -> Conversions.
+// Solange ADS_ID leer ist: kein Banner, kein Google-Tag, keine externe
+// Verbindung. Die Seite verhaelt sich dann exakt wie ohne Messung.
+// ==========================================================
+const ADS_ID       = '';   // z. B. 'AW-123456789'
+const CONV_ANFRAGE = '';   // z. B. 'AW-123456789/AbCdEfGhIjKlMn'
+const CONV_ANRUF   = '';   // z. B. 'AW-123456789/OpQrStUvWxYzAb'
+
+window.ofMessung = function(){};   // wird unten ersetzt, wenn ADS_ID gesetzt ist
+
+(function(){
+  const SCHL = 'objektfrei_einwilligung';
+  function lies(){try{return localStorage.getItem(SCHL)||'';}catch(e){return '';}}
+  function schreib(v){try{localStorage.setItem(SCHL,v);}catch(e){}}
+
+  const banner = document.getElementById('cbanner');
+  const neuLnk = document.getElementById('cbneu');
+  if(!ADS_ID){ if(banner)banner.remove(); return; }   // nichts geladen, nichts gezeigt
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+
+  // Voreinstellung vor jedem Tag: alles abgelehnt.
+  gtag('consent','default',{
+    ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied',
+    analytics_storage:'denied', functionality_storage:'granted',
+    security_storage:'granted', wait_for_update:500
+  });
+
+  let geladen=false;
+  function tagLaden(){
+    if(geladen)return; geladen=true;
+    const s=document.createElement('script');
+    s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+ADS_ID;
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', ADS_ID, {allow_enhanced_conversions:true});
+  }
+
+  function zeigen(an){
+    if(!banner)return;
+    if(an){ banner.hidden=false; requestAnimationFrame(()=>banner.classList.add('an')); }
+    else  { banner.classList.remove('an'); setTimeout(()=>{banner.hidden=true;},340); }
+  }
+
+  function setzen(ja){
+    schreib(ja?'ja':'nein');
+    gtag('consent','update',{
+      ad_storage:        ja?'granted':'denied',
+      ad_user_data:      ja?'granted':'denied',
+      ad_personalization:ja?'granted':'denied',
+      analytics_storage: ja?'granted':'denied'
+    });
+    if(ja)tagLaden();
+    zeigen(false);
+    if(neuLnk)neuLnk.hidden=false;
+  }
+
+  const stand=lies();
+  if(stand==='ja'){ tagLaden(); gtag('consent','update',{
+      ad_storage:'granted',ad_user_data:'granted',
+      ad_personalization:'granted',analytics_storage:'granted'}); }
+  if(stand){ if(neuLnk)neuLnk.hidden=false; }
+  else { setTimeout(()=>zeigen(true), 600); }   // nach dem ersten Aufbau, nicht davor
+
+  const ja=document.getElementById('cbja'), nein=document.getElementById('cbnein');
+  if(ja)  ja.addEventListener('click',  ()=>setzen(true));
+  if(nein)nein.addEventListener('click',()=>setzen(false));
+  if(neuLnk)neuLnk.addEventListener('click',e=>{e.preventDefault();zeigen(true);});
+
+  // Conversion melden – nur mit Zustimmung und nur mit hinterlegter Kennung.
+  window.ofMessung = function(ziel, zusatz){
+    if(!ziel || lies()!=='ja')return;
+    gtag('event','conversion', Object.assign({send_to:ziel}, zusatz||{}));
+  };
+
+  // Telefonklicks: Kopfzeile, Kontaktkarte, Handy-Leiste.
+  document.addEventListener('click', function(e){
+    const a=e.target.closest && e.target.closest('a[href^="tel:"]');
+    if(a)window.ofMessung(CONV_ANRUF);
+  }, true);
+})();
+
 
 // ==========================================================
 // PREIS-INDEX – jaehrlich im Januar pruefen.
@@ -2379,6 +2686,23 @@ const INDEX=1.00;
   }
 
   // Herkunft: /#kontakt beim Laden = Transporter-QR, ?q= = Karte/Flyer
+  const KANAL=(function(){
+    const p=URLP;
+    const us=(p.get('utm_source')||'').toLowerCase();
+    const um=(p.get('utm_medium')||'').toLowerCase();
+    if(p.get('gclid')||p.get('gbraid')||p.get('wbraid')||p.get('gad_source')
+       ||(us.indexOf('google')===0&&(um.indexOf('cpc')>-1||um.indexOf('paid')>-1)))
+      return 'Google Ads'+(p.get('utm_campaign')?' · '+p.get('utm_campaign'):'');
+    if(us) return 'Kampagne: '+us+(um?' / '+um:'');
+    const r=document.referrer||'';
+    if(!r) return 'Direkt';
+    let host=''; try{host=new URL(r).hostname.replace(/^www\./,'');}catch(e){}
+    if(!host||host.indexOf('objektfrei.de')>-1) return 'Direkt';
+    if(/^(www\.)?(google|bing|duckduckgo|ecosia|yahoo|startpage|qwant)\./i.test(host))
+      return 'Organische Suche ('+host+')';
+    return 'Verweis: '+host;
+  })();
+
   const HERKUNFT=(function(){
     const q=(URLP.get('q')||'').toLowerCase();
     const m={t:'Transporter',transporter:'Transporter',k:'Visitenkarte',karte:'Visitenkarte',f:'Flyer',flyer:'Flyer'};
@@ -2973,6 +3297,7 @@ const INDEX=1.00;
     fd.append('startzeit',String(startzeit));
     fd.append('anfrage_id',ANFRAGE_ID);
     fd.append('herkunft',HERKUNFT);
+    fd.append('kanal',KANAL);
     fd.append('einstieg',(function(){try{return sessionStorage.getItem('of_quelle')||'Direkt zum Rechner';}catch(e){return 'Direkt zum Rechner';}})());
     fd.append('plz_ausserhalb',plzFern?'ja':'nein');
     if(DEV)fd.append('testmodus','ja');
@@ -2982,6 +3307,13 @@ const INDEX=1.00;
       zustandWeg();
       gesendet=true;laeuft=false;
       merkeSendung();
+      (function(){
+        try{
+          const s=schaetzung();
+          const wert=(s&&s.lo&&s.hi)?Math.round((s.lo+s.hi)/2):undefined;
+          window.ofMessung(CONV_ANFRAGE, wert?{value:wert,currency:'EUR'}:undefined);
+        }catch(e){}
+      })();
       abschluss();
     }).catch(txt=>{
       let m=null;
@@ -2997,15 +3329,18 @@ const INDEX=1.00;
     const body=document.getElementById('demobody');
     if(!body)return;
     const EX=[
+      {val:'1.300 – 1.750 €',left:52,w:18,mid:'1.250 €',max:'2.500 €',
+       chips:[['basis','Basis: Wohnung · 1 Zimmer'],['minus','− Wertanrechnung möglich']],
+       note:'Beispiel: 1-Zimmer-Wohnung, wenig möbliert – inkl. Entsorgung, Anfahrt und MwSt.'},
       {val:'2.850 – 3.950 €',left:48,w:18,mid:'3.000 €',max:'6.000 €',
-       chips:[['basis','Basis: Wohnung · 3 Zimmer']],
-       note:'Beispiel einer 3-Zimmer-Wohnung, normal gefüllt – inkl. MwSt.'},
+       chips:[['basis','Basis: Wohnung · 3 Zimmer'],['minus','− Wertanrechnung möglich']],
+       note:'Beispiel: 3-Zimmer-Wohnung, normal möbliert – inkl. Entsorgung, Anfahrt und MwSt.'},
       {val:'2.000 – 2.750 €',left:50,w:19,mid:'2.000 €',max:'4.000 €',
-       chips:[['basis','Basis: Wohnung · 2 Zimmer']],
-       note:'Beispiel einer 2-Zimmer-Wohnung, normal gefüllt – inkl. MwSt.'},
+       chips:[['basis','Basis: Wohnung · 2 Zimmer'],['minus','− Wertanrechnung möglich']],
+       note:'Beispiel: 2-Zimmer-Wohnung, normal möbliert – inkl. Entsorgung, Anfahrt und MwSt.'},
       {val:'6.250 – 8.750 €',left:52,w:21,mid:'6.000 €',max:'12.000 €',
-       chips:[['basis','Basis: Haus komplett']],
-       note:'Beispiel einer kompletten Haushaltsauflösung – inkl. MwSt.'}
+       chips:[['basis','Basis: Haus komplett'],['minus','− Wertanrechnung möglich']],
+       note:'Beispiel: komplettes Haus – inkl. Entsorgung, Anfahrt und MwSt.'}
     ];
     let i=0;
     const red=window.matchMedia('(prefers-reduced-motion: reduce)').matches;

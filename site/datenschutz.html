@@ -42,11 +42,23 @@ a{color:var(--rust)}
 .toc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:32px}
 .toc ol{padding-left:20px;margin:0;font-size:14.5px}
 .toc li{margin-bottom:3px}
-table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 16px}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+/* table-layout:fixed – sonst erzwingen die Spalten ihre Mindestbreite und die
+   Tabelle wird am Handy 439 px breit (Bildschirm 390 px). */
+table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:14px;margin:12px 0 16px}
+/* break-word statt anywhere, dazu echte Silbentrennung – sonst steht da
+   "Auftragsverarbeit / ung" statt "Auftrags- / verarbeitung". */
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;
+  overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+@media(max-width:560px){th,td{padding:8px 5px;font-size:12.5px;line-height:1.5}}
 th{background:var(--green);color:var(--cream);font-size:12.5px;font-weight:600}
+code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13px;background:#fff;
+  border:1px solid var(--line);border-radius:4px;padding:1px 5px;white-space:nowrap}
 footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px}
-footer a{margin-right:14px}
+/* Zwischen den Links steht im Quelltext kein Leerzeichen – ohne Flexbox gibt
+   es keine Umbruchstelle und die Zeile laeuft auf schmalen Geraeten hinaus. */
+footer .wrap{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+footer a{margin-right:0}
+footer .wrap>div{flex:0 0 100%}
 </style>
 </head>
 <body>
@@ -54,7 +66,7 @@ footer a{margin-right:14px}
 <main><div class="wrap">
 
 <h1>Datenschutzerklärung</h1>
-<p class="stand">Stand: 29. Juli 2026 · Version 2.0</p>
+<p class="stand">Stand: 22. September 2026 · Version 2.1</p>
 
 <div class="toc">
 <ol>
@@ -62,7 +74,7 @@ footer a{margin-right:14px}
 <li>Grundsätze und Rechtsgrundlagen</li>
 <li>Aufruf der Website und Hosting</li>
 <li>Schriftarten</li>
-<li>Keine Cookies, keine Analyse, keine Werbenetzwerke</li>
+<li>Cookies, Einwilligung und Conversion-Messung</li>
 <li>Preisrechner</li>
 <li>Anfrageformular</li>
 <li>Fotos zum Objekt</li>
@@ -95,7 +107,7 @@ Telefon: 0611 16889631 · E-Mail: info@objektfrei.de</p>
 </ul>
 
 <h2>3. Aufruf der Website und Hosting</h2>
-<p>Diese Website wird bei der <strong>Hetzner Online GmbH</strong>, Industriestr. 25, 91710 Gunzenhausen, in einem Rechenzentrum in Deutschland betrieben. Beim Aufruf der Seite werden technisch notwendige Daten in Server-Protokolldateien verarbeitet:</p>
+<p>Diese Website wird bei der <strong>Hetzner Online GmbH</strong>, Industriestr. 25, 91710 Gunzenhausen, in einem Rechenzentrum in Deutschland betrieben. Beim Aufruf der Seite werden technisch notwendige Daten in Server-Proto&shy;koll&shy;dateien verarbeitet:</p>
 <ul>
 <li>IP-Adresse des anfragenden Geräts</li>
 <li>Datum und Uhrzeit des Zugriffs</li>
@@ -103,27 +115,48 @@ Telefon: 0611 16889631 · E-Mail: info@objektfrei.de</p>
 <li>Meldung über den Erfolg des Abrufs</li>
 <li>Browsertyp und Betriebssystem</li>
 </ul>
-<p>Diese Daten dienen ausschließlich dem sicheren Betrieb, der Fehlersuche und der Abwehr von Angriffen. Eine Zusammenführung mit anderen Datenquellen findet nicht statt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Die Protokolldateien werden nach 30 Tagen automatisch gelöscht. Mit Hetzner besteht ein Vertrag über Auftragsverarbeitung nach Art. 28 DSGVO.</p>
+<p>Diese Daten dienen ausschließlich dem sicheren Betrieb, der Fehlersuche und der Abwehr von Angriffen. Eine Zusammenführung mit anderen Datenquellen findet nicht statt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Die Protokolldateien werden nach 30 Tagen automatisch gelöscht. Mit Hetzner besteht ein Vertrag über Auftrags&shy;verarbeitung nach Art. 28 DSGVO.</p>
 <p>Die Verbindung zu dieser Website ist durchgängig per TLS verschlüsselt; Sie erkennen das am Schlosssymbol in der Adressleiste Ihres Browsers.</p>
 
 <h2>4. Schriftarten</h2>
 <p>Alle auf dieser Website verwendeten Schriftarten werden von unserem eigenen Server ausgeliefert. Eine Verbindung zu Servern Dritter – etwa zu Google Fonts – findet dabei nicht statt.</p>
 
-<h2>5. Keine Cookies, keine Analyse, keine Werbenetzwerke</h2>
+<h2>5. Cookies, Einwilligung und Conversion-Messung</h2>
 <div class="box">
-Diese Website setzt <strong>keine Cookies</strong> und bindet <strong>keine Analyse-, Tracking- oder Werbedienste</strong> ein. Es gibt keine Social-Media-Schaltflächen, keine eingebetteten Karten und keine Zählpixel. Ein Einwilligungsbanner ist deshalb nicht erforderlich.
+Diese Website bindet <strong>keine Analysedienste, keine Social-Media-Schaltflächen, keine eingebetteten Karten und keine Zählpixel</strong> ein. Ein einziger Dienst eines Dritten kann hinzukommen – die Conversion-Messung von Google Ads –, und dieser wird <strong>ausschließlich nach Ihrer ausdrücklichen Einwilligung geladen</strong>. Solange Sie nicht zugestimmt haben, stellt diese Website <strong>keine Verbindung zu Google oder einem anderen Dritten</strong> her.
 </div>
-<h3>Lokaler Speicher des Browsers</h3>
-<p>Nach dem Absenden einer Anfrage legt Ihr Browser <strong>einen einzigen technischen Eintrag</strong> in seinem lokalen Speicher ab: die Anfragenummer, die Anzahl Ihrer Anfragen und den Zeitpunkt der letzten Übermittlung. Dieser Eintrag verhindert, dass eine Anfrage durch mehrfaches Klicken oder Neuladen versehentlich doppelt bei uns eingeht.</p>
-<ul>
-<li>Der Eintrag verbleibt <strong>ausschließlich auf Ihrem Gerät</strong> und wird nicht an uns oder an Dritte übertragen.</li>
-<li>Er enthält <strong>keine personenbezogenen Daten</strong> – weder Namen noch Kontaktdaten noch Angaben zum Objekt.</li>
-<li>Es findet <strong>keine Wiedererkennung und keine Auswertung Ihres Verhaltens</strong> statt.</li>
-<li>Sie können den Eintrag jederzeit über die Einstellungen Ihres Browsers löschen; die Website bleibt uneingeschränkt nutzbar.</li>
-</ul>
-<p>Rechtsgrundlage für diese Speicherung ist § 25 Abs. 2 Nr. 2 TDDDG, da sie für den von Ihnen ausdrücklich gewünschten Dienst – das fehlerfreie Absenden Ihrer Anfrage – unbedingt erforderlich ist. Eine Einwilligung ist dafür nicht nötig.</p>
 
-<p>Sollte künftig ein Analysewerkzeug oder eine Kartendarstellung ergänzt werden, wird diese Erklärung vorher entsprechend erweitert und – soweit erforderlich – eine Einwilligung eingeholt.</p>
+<h3>Lokaler Speicher des Browsers</h3>
+<p>Ihr Browser legt <strong>höchstens zwei technische Einträge</strong> in seinem lokalen Speicher ab:</p>
+<ul>
+<li><strong>Nach dem Absenden einer Anfrage:</strong> die Anfragenummer, die Anzahl Ihrer Anfragen und den Zeitpunkt der letzten Übermittlung. Dieser Eintrag verhindert, dass eine Anfrage durch mehrfaches Klicken oder Neuladen versehentlich doppelt bei uns eingeht.</li>
+<li><strong>Ihre Entscheidung im Einwilligungs&shy;fenster</strong> („angenommen" oder „abgelehnt"). Ohne diesen Eintrag müssten wir Sie bei jedem Seitenaufruf erneut fragen – und eine Ablehnung könnten wir nicht respektieren.</li>
+</ul>
+<ul>
+<li>Beide Einträge verbleiben <strong>ausschließlich auf Ihrem Gerät</strong> und werden nicht an uns oder an Dritte übertragen.</li>
+<li>Sie enthalten <strong>keine personenbezogenen Daten</strong> – weder Namen noch Kontaktdaten noch Angaben zum Objekt.</li>
+<li>Es findet <strong>keine Wiedererkennung und keine Auswertung Ihres Verhaltens</strong> statt.</li>
+<li>Sie können die Einträge jederzeit über die Einstellungen Ihres Browsers löschen; die Website bleibt uneingeschränkt nutzbar.</li>
+</ul>
+<p>Rechtsgrundlage für diese Speicherung ist § 25 Abs. 2 Nr. 2 TDDDG, da sie für den von Ihnen ausdrücklich gewünschten Dienst – das fehlerfreie Absenden Ihrer Anfrage beziehungsweise die Beachtung Ihrer Entscheidung – unbedingt erforderlich ist. Eine Einwilligung ist dafür nicht nötig.</p>
+
+<h3>Google Ads Conversion-Messung – nur mit Ihrer Einwilligung</h3>
+<p>Wir schalten Anzeigen bei Google. Um zu erkennen, welche Anzeige zu einer Anfrage geführt hat, setzen wir die <strong>Conversion-Messung von Google Ads</strong> ein, einen Dienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+<div class="box">
+<strong>Ohne Ihre Einwilligung geschieht nichts.</strong> Der Google-Dienst wird <strong>erst geladen, nachdem Sie im Hinweisfenster auf „Akzeptieren" geklickt haben</strong>. Lehnen Sie ab, wird <strong>kein Skript geladen, kein Cookie gesetzt und keine Verbindung zu Google aufgebaut</strong>. Die Website bleibt vollständig nutzbar, der Preisrechner ebenso. „Ablehnen" und „Akzeptieren" stehen gleichwertig nebeneinander.
+</div>
+<p>Haben Sie eingewilligt, verarbeitet Google:</p>
+<ul>
+<li>ein <strong>Cookie mit einer zufälligen Kennung</strong> (Bezeichnung <code>_gcl_*</code>), das Ihren Klick auf unsere Anzeige mit Ihrer späteren Anfrage verknüpft,</li>
+<li>Ihre IP-Adresse sowie Browser- und Geräteangaben,</li>
+<li>die Information, dass auf dieser Website eine Anfrage abgesendet oder die Telefonnummer angeklickt wurde – bei einer Anfrage zusätzlich der <strong>im Preisrechner geschätzte Auftragswert</strong>, damit wir große und kleine Anfragen unterscheiden können.</li>
+</ul>
+<p><strong>Ihr Name, Ihre Anschrift, Ihre E-Mail-Adresse, Ihre Telefonnummer, Ihre Angaben zum Objekt und Ihre Fotos werden dabei nicht an Google übermittelt.</strong> An Google geht ausschließlich die Information, dass eine Anfrage stattgefunden hat, nebst dem geschätzten Wert.</p>
+<p>Wir verwenden dabei den <strong>Einwilligungsmodus von Google (Consent Mode v2)</strong>. Solange keine Einwilligung vorliegt, stehen sämtliche Einwilligungssignale gegenüber Google auf „abgelehnt".</p>
+<p>Rechtsgrundlage für das Speichern und Auslesen von Informationen auf Ihrem Endgerät ist Ihre Einwilligung nach <strong>§ 25 Abs. 1 TDDDG</strong>, für die anschließende Verarbeitung Ihrer Daten <strong>Art. 6 Abs. 1 lit. a DSGVO</strong>. Eine Verarbeitung in den USA ist dabei möglich; Google ist unter dem EU-US Data Privacy Framework zertifiziert, ein Auftrags&shy;verarbeitungsvertrag besteht.</p>
+<p><strong>Widerruf:</strong> Sie können Ihre Entscheidung jederzeit ändern – über den Link <em>Cookie-Einstellungen</em> in der Fußzeile dieser Website. Der Widerruf wirkt für die Zukunft; die Rechtmäßigkeit der bis dahin erfolgten Verarbeitung bleibt unberührt. Zusätzlich können Sie personalisierte Werbung direkt bei Google unter <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a> deaktivieren.</p>
+
+<p>Sollte künftig ein weiteres Analysewerkzeug oder eine Kartendarstellung ergänzt werden, wird diese Erklärung vorher entsprechend erweitert und – soweit erforderlich – eine Einwilligung eingeholt.</p>
 
 <h2>6. Preisrechner</h2>
 <p>Der Preisrechner läuft <strong>vollständig in Ihrem Browser</strong>. Ihre Angaben zu Objekt, Größe, Etage und Umfang werden während der Berechnung <strong>nicht an uns übertragen</strong>. Erst wenn Sie das Formular am Ende ausdrücklich absenden, gelangen die Daten zu uns. Brechen Sie vorher ab oder schließen Sie die Seite, bleibt uns nichts erhalten.</p>
@@ -136,7 +169,8 @@ Diese Website setzt <strong>keine Cookies</strong> und bindet <strong>keine Anal
 <li><strong>Freiwillig:</strong> Ihre Telefonnummer, falls Sie eine schnellere Rückmeldung wünschen.</li>
 <li><strong>Objektangaben:</strong> Anliegen, Objektart, Größe, Etage, Zugang, Füllgrad, gewünschter Termin, gewählte Zusatzleistungen und die daraus berechnete Preisspanne.</li>
 <li><strong>Weitere freiwillige Angaben:</strong> Ihre Anmerkungen, die Angabe, ob Sie als Hausverwaltung anfragen, sowie bei Rahmenanfragen die geschätzte Zahl der Räumungen pro Jahr.</li>
-<li><strong>Technische Begleitangaben:</strong> die Anfragenummer, ein Hinweis darauf, ob das Objekt außerhalb unseres Kerngebiets liegt, sowie – sofern Sie über einen QR-Code auf Fahrzeug, Visitenkarte oder Flyer zu uns gefunden haben – die Angabe, welches dieser Werbemittel Sie verwendet haben. Letztere Angabe dient allein der Einschätzung, welche Werbemittel sich lohnen; sie ist nicht mit Ihrer Person verknüpfbar über die Anfrage hinaus.</li>
+<li><strong>Technische Begleitangaben:</strong> die Anfragenummer, ein Hinweis darauf, ob das Objekt außerhalb unseres Kerngebiets liegt, sowie – sofern Sie über einen QR-Code auf Fahrzeug, Visitenkarte oder Flyer zu uns gefunden haben – die Angabe, welches dieser Werbemittel Sie verwendet haben.</li>
+<li><strong>Zugangsweg:</strong> eine grobe Einordnung, über welchen Weg Sie auf unsere Website gelangt sind – etwa „Google Ads", „Organische Suche", „Direkt" oder der Name der verweisenden Website. Wir lesen das ausschließlich aus der von Ihnen aufgerufenen Adresszeile und der zuvor besuchten Seite. <strong>Dafür wird kein Cookie gesetzt und nichts auf Ihrem Gerät gespeichert</strong>; die Angabe entsteht erst im Moment des Absendens und wandert allein in die Anfrage-E-Mail an uns. Sie dient der Einschätzung, welche Werbung sich lohnt, und ist über die Anfrage hinaus nicht mit Ihrer Person verknüpfbar.</li>
 </ul>
 <p>Zweck ist die Bearbeitung Ihrer Anfrage und die Erstellung eines Angebots. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Kommt kein Auftrag zustande, löschen wir die Anfrage nach 6 Monaten.</p>
 <h3>Schutz vor missbräuchlichen Anfragen</h3>
@@ -160,7 +194,7 @@ Diese Website setzt <strong>keine Cookies</strong> und bindet <strong>keine Anal
 <p>Unmittelbar nach dem Absenden erhalten Sie an die angegebene Adresse eine Bestätigung mit Ihrer Anfragenummer und einer Zusammenfassung Ihrer Angaben. Sie dient Ihrer Nachvollziehbarkeit und der Korrektur etwaiger Fehleingaben. Der Versand erfolgt über denselben Anbieter wie unser übriger E-Mail-Verkehr (siehe Abschnitt 10). Das in der Bestätigung enthaltene Logo ist der Nachricht direkt beigefügt; es wird <strong>nicht von einem Server nachgeladen</strong>, sodass beim Öffnen keine Verbindung zu uns entsteht und wir nicht erkennen können, ob oder wann Sie die Nachricht gelesen haben. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Ein Werbeversand findet nicht statt; einen Newsletter gibt es nicht.</p>
 
 <h2>10. Kontakt per E-Mail oder Telefon</h2>
-<p>Nehmen Sie auf anderem Weg Kontakt auf, verarbeiten wir Ihre Angaben zur Bearbeitung des Anliegens (Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO). Der E-Mail-Verkehr wird über <strong>Google Workspace</strong> abgewickelt (Google Ireland Limited, Dublin). Eine Verarbeitung in Drittländern ist dabei möglich; Google ist unter dem EU-US Data Privacy Framework zertifiziert, ein Auftragsverarbeitungsvertrag besteht. Wir löschen Korrespondenz, sobald sie nicht mehr erforderlich ist und keine Aufbewahrungspflicht entgegensteht.</p>
+<p>Nehmen Sie auf anderem Weg Kontakt auf, verarbeiten wir Ihre Angaben zur Bearbeitung des Anliegens (Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO). Der E-Mail-Verkehr wird über <strong>Google Workspace</strong> abgewickelt (Google Ireland Limited, Dublin). Eine Verarbeitung in Drittländern ist dabei möglich; Google ist unter dem EU-US Data Privacy Framework zertifiziert, ein Auftrags&shy;verarbeitungsvertrag besteht. Wir löschen Korrespondenz, sobald sie nicht mehr erforderlich ist und keine Aufbewahrungspflicht entgegensteht.</p>
 
 <h2>11. Verarbeitung nach Auftragserteilung</h2>
 <p>Erteilen Sie uns einen Auftrag, verarbeiten wir zusätzlich die zur Durchführung nötigen Daten: vollständige Anschrift des Objekts, Ansprechpartner vor Ort, Zugangsdaten wie Schlüsselübergaben, Angaben zur Abrechnung sowie die im Rahmen der Leistung entstehenden Unterlagen.</p>
@@ -169,24 +203,27 @@ Diese Website setzt <strong>keine Cookies</strong> und bindet <strong>keine Anal
 <h3>Entsorgungsnachweise</h3>
 <p>Für die fachgerechte Entsorgung geben wir die notwendigen Angaben an das jeweilige Entsorgungsunternehmen weiter. Rechtsgrundlage ist Art. 6 Abs. 1 lit. c DSGVO in Verbindung mit den abfallrechtlichen Nachweispflichten.</p>
 
-<h2>12. Empfänger und Auftragsverarbeiter</h2>
+<h2>12. Empfänger und Auftrags&shy;verarbeiter</h2>
 <table>
 <tr><th>Empfänger</th><th>Zweck</th><th>Grundlage</th></tr>
-<tr><td>Hetzner Online GmbH, Deutschland</td><td>Hosting, Serverbetrieb</td><td>Auftragsverarbeitung, Art. 28 DSGVO</td></tr>
-<tr><td>Google Ireland Limited</td><td>E-Mail über Google Workspace, ggf. Schriftarten</td><td>Auftragsverarbeitung, EU-US DPF</td></tr>
-<tr><td>Entsorgungsunternehmen</td><td>Nachweis der Entsorgung</td><td>Art. 6 Abs. 1 lit. c DSGVO</td></tr>
+<tr><td>Hetzner Online GmbH, Deutschland</td><td>Hosting, Serverbetrieb</td><td>Auftrags&shy;verarbeitung, Art. 28 DSGVO</td></tr>
+<tr><td>Google Ireland Limited</td><td>E-Mail über Google Workspace</td><td>Auftrags&shy;verarbeitung, EU-US DPF</td></tr>
+<tr><td>Google Ireland Limited</td><td>Conversion-Messung Google Ads – <strong>nur mit Ihrer Einwilligung</strong></td><td>Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG</td></tr>
+<tr><td>Entsorgungs&shy;unternehmen</td><td>Nachweis der Entsorgung</td><td>Art. 6 Abs. 1 lit. c DSGVO</td></tr>
 </table>
 <p>Buchhaltung und Rechnungswesen erledigen wir derzeit selbst; sobald ein Steuerbüro eingebunden wird, ergänzen wir diese Tabelle entsprechend. Eine Weitergabe zu Werbezwecken findet nicht statt. Ihre Daten werden nicht verkauft.</p>
 
 <h2>13. Speicherdauer im Überblick</h2>
 <table>
 <tr><th>Daten</th><th>Dauer</th></tr>
-<tr><td>Server-Protokolldateien</td><td>30 Tage</td></tr>
+<tr><td>Server-Proto&shy;koll&shy;dateien</td><td>30 Tage</td></tr>
 <tr><td>Missbrauchsschutz (Prüfsumme der IP)</td><td>1 Stunde</td></tr>
-<tr><td>Anfragenummer zur Erkennung doppelter Übermittlungen</td><td>24 Stunden</td></tr>
+<tr><td>Anfragenummer zur Erkennung doppelter Über&shy;mitt&shy;lungen</td><td>24 Stunden</td></tr>
+<tr><td>Ihre Entscheidung im Einwilligungs&shy;fenster (nur auf Ihrem Gerät)</td><td>bis Sie sie ändern oder den Browserspeicher löschen</td></tr>
+<tr><td>Google-Ads-Cookie <code>_gcl_*</code> – nur nach Einwilligung</td><td>bis zu 90 Tage (von Google vorgegeben)</td></tr>
 <tr><td>Anfragen ohne Auftrag</td><td>6 Monate</td></tr>
 <tr><td>Hochgeladene Fotos</td><td>90 Tage</td></tr>
-<tr><td>Einsatzdokumentation, Übergabeprotokoll</td><td>3 Jahre</td></tr>
+<tr><td>Einsatz&shy;doku&shy;mentation, Übergabe&shy;protokoll</td><td>3 Jahre</td></tr>
 <tr><td>Rechnungen und steuerlich relevante Unterlagen</td><td>10 Jahre (§ 147 AO)</td></tr>
 </table>
 

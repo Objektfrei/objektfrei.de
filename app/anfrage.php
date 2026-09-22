@@ -126,6 +126,10 @@ foreach ($felder as $key => $label) {
 }
 
 $herkunft   = sauber((string)($_POST['herkunft'] ?? ''), 60);
+/* Woher der Besucher kam: aus der Adresszeile und dem Verweis gelesen.
+   Kein Cookie, keine Einwilligung – deshalb auch bei jedem vorhanden,
+   der das Einwilligungsbanner ablehnt. */
+$kanal      = sauber((string)($_POST['kanal'] ?? ''), 120);
 $plzFremd   = (string)($_POST['plz_ausserhalb'] ?? '') === 'ja';
 
 /* ---------- 7. Bilder: Inhalt prüfen und komplett neu erzeugen ---------- */
@@ -337,6 +341,7 @@ try {
     if ($telefon !== '') { $kopf .= ' · Telefon: <b>' . htmlspecialchars($telefon) . '</b>'; }
     if ($anfrageId !== '') { $kopf .= '<br>Nummer: <b>' . htmlspecialchars($anfrageId) . '</b>'; }
     if ($herkunft !== '') { $kopf .= '<br>Herkunft: <b>' . htmlspecialchars($herkunft) . '</b>'; }
+    if ($kanal !== '')    { $kopf .= '<br>Kanal: <b>' . htmlspecialchars($kanal) . '</b>'; }
 
     $m->Body = '<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
         . '<meta name="color-scheme" content="light only">'

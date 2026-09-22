@@ -373,10 +373,8 @@ try {
     // Logo als eingebetteter Anhang – kein Hotlink, laedt auch ohne Bilderfreigabe nach
     $logo = '';
     if (is_file(LOGO_PFAD) && $k->addEmbeddedImage(LOGO_PFAD, 'oflogo', 'objektfrei.png')) {
-        // 60x46 statt 46x46: das Zeichen ist breiter als hoch (114:88).
-        // Quadratisch eingebunden wuerde es in der Mail gestaucht.
-        $logo = '<img src="cid:oflogo" width="60" height="46" alt=""'
-              . ' style="display:block;border:0;outline:none;width:60px;height:46px">';
+        $logo = '<img src="cid:oflogo" width="46" height="46" alt=""'
+              . ' style="display:block;border:0;outline:none;width:46px;height:46px">';
     }
 
     $vorname = trim(explode(' ', $name)[0]);

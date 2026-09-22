@@ -17,6 +17,9 @@ COPY composer.json ./
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
 COPY anfrage.php ./
+# assets/ enthaelt das Logo der Bestaetigungsmail. Ohne diese Zeile laege es
+# zwar im Repo, aber nicht im Abbild – die Mail kaeme dann ohne Bildmarke.
+COPY assets/ ./assets/
 COPY php.ini /usr/local/etc/php/conf.d/zz-objektfrei.ini
 
 # Ohne clear_env = no räumt PHP-FPM die Umgebung leer, bevor das Skript läuft –

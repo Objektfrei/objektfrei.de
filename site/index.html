@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entrümpelung &amp; Haushaltsauflösung Wiesbaden zum Festpreis</title>
 <link rel="canonical" href="https://objektfrei.de/">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -1737,6 +1737,13 @@ img{height:auto}
 .cb-btn:hover{background:var(--cream);color:var(--green-deep)}
 .cb-btn.ja{background:var(--rust);border-color:var(--rust);color:#fff}
 .cb-btn.ja:hover{background:var(--rust-soft);border-color:var(--rust-soft);color:#fff}
+/* Solange das Banner steht, ruecken die beiden unteren Leisten darueber.
+   Ohne das verdeckt es am Handy die Aktionsleiste ("Preis in 60 Sek.
+   berechnen") und im Rechner die Weiter-Schaltflaeche – also genau die
+   Knoepfe, auf die es ankommt. */
+body.cb-offen .mobilebar{bottom:var(--cb-h,0);transition:bottom .32s ease}
+body.cb-offen .funnel .fnav{bottom:var(--cb-h,0)}
+@media(prefers-reduced-motion:reduce){body.cb-offen .mobilebar{transition:none}}
 @media(max-width:720px){
   .cbanner{padding:16px 18px calc(16px + env(safe-area-inset-bottom))}
   .cb-in{gap:14px}
@@ -1756,7 +1763,7 @@ img{height:auto}
       "name": "Was kostet eine Entrümpelung?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Das hängt von Größe, Füllmenge und Zugänglichkeit des Objekts ab. Unser Preisrechner im Anfrageformular zeigt Ihnen sofort eine grobe Spanne. Den schriftlichen Festpreis erhalten Sie nach der kostenlosen Besichtigung – er gilt, solange die Angaben vollständig sind. Verwertbare Gegenstände rechnen wir an und senken so Ihre Kosten."
+        "text": "Das hängt von Größe, Füllmenge und Zugänglichkeit des Objekts ab. Unser Preisrechner im Anfrageformular zeigt Ihnen sofort eine grobe Spanne. Den schriftlichen Festpreis erhalten Sie nach der kostenlosen Besichtigung – er gilt, solange die Angaben vollständig sind. Verwertbare Gegenstände rechnen wir an und senken so Ihre Kosten. Alle Preisspannen nach Objektgröße stehen auf unserer Seite Was kostet eine Entrümpelung ."
       }
     },
     {
@@ -2433,7 +2440,7 @@ img{height:auto}
     <div class="faq">
       <details>
         <summary>Was kostet eine Entrümpelung?</summary>
-        <p>Das hängt von Größe, Füllmenge und Zugänglichkeit des Objekts ab. Unser Preisrechner im Anfrageformular zeigt Ihnen sofort eine grobe Spanne. Den schriftlichen Festpreis erhalten Sie nach der kostenlosen Besichtigung – er gilt, solange die Angaben vollständig sind. Verwertbare Gegenstände rechnen wir an und senken so Ihre Kosten.</p>
+        <p>Das hängt von Größe, Füllmenge und Zugänglichkeit des Objekts ab. Unser Preisrechner im Anfrageformular zeigt Ihnen sofort eine grobe Spanne. Den schriftlichen Festpreis erhalten Sie nach der kostenlosen Besichtigung – er gilt, solange die Angaben vollständig sind. Verwertbare Gegenstände rechnen wir an und senken so Ihre Kosten. Alle Preisspannen nach Objektgröße stehen auf unserer Seite <a href="/kosten">Was kostet eine Entrümpelung</a>.</p>
       </details>
       <details>
         <summary>Arbeiten Sie mit Hausverwaltungen auf Rahmenvereinbarung?</summary>
@@ -2567,9 +2574,15 @@ const FORM_ENDPOINT='/anfrage.php';
 // Solange ADS_ID leer ist: kein Banner, kein Google-Tag, keine externe
 // Verbindung. Die Seite verhaelt sich dann exakt wie ohne Messung.
 // ==========================================================
-const ADS_ID       = '';   // z. B. 'AW-123456789'
-const CONV_ANFRAGE = '';   // z. B. 'AW-123456789/AbCdEfGhIjKlMn'
-const CONV_ANRUF   = '';   // z. B. 'AW-123456789/OpQrStUvWxYzAb'
+const ADS_ID       = 'AW-18288007764';
+const CONV_ANFRAGE = 'AW-18288007764/yJY0CNiT1IEdENS0s5BE';   // Lead-Formular senden
+// Anrufe werden NICHT als Klick gezaehlt, sondern ueber die Google-
+// Anrufweiterleitung: Google ersetzt die angezeigte Nummer fuer Besucher aus
+// einer Anzeige durch eine Weiterleitungsnummer und zaehlt den echten Anruf.
+// Wer nicht aus einer Anzeige kommt, sieht weiter die eigene Nummer – die
+// NAP-Konsistenz zum Unternehmensprofil bleibt damit unberuehrt.
+const CALL_CONV    = 'AW-18288007764/HNYaCIO704EdENS0s5BE';   // Anrufe ueber Website
+const TEL_NUMMER   = '0611 16889631';
 
 window.ofMessung = function(){};   // wird unten ersetzt, wenn ADS_ID gesetzt ist
 
@@ -2601,13 +2614,29 @@ window.ofMessung = function(){};   // wird unten ersetzt, wenn ADS_ID gesetzt is
     document.head.appendChild(s);
     gtag('js', new Date());
     gtag('config', ADS_ID, {allow_enhanced_conversions:true});
+    if(CALL_CONV) gtag('config', CALL_CONV, {phone_conversion_number: TEL_NUMMER});
   }
 
+  function platzMachen(an){
+    if(an){
+      document.body.style.setProperty('--cb-h', banner.offsetHeight + 'px');
+      document.body.classList.add('cb-offen');
+    }else{
+      document.body.classList.remove('cb-offen');
+      document.body.style.removeProperty('--cb-h');
+    }
+  }
   function zeigen(an){
     if(!banner)return;
-    if(an){ banner.hidden=false; requestAnimationFrame(()=>banner.classList.add('an')); }
-    else  { banner.classList.remove('an'); setTimeout(()=>{banner.hidden=true;},340); }
+    if(an){ banner.hidden=false; platzMachen(true);
+            requestAnimationFrame(()=>banner.classList.add('an')); }
+    else  { banner.classList.remove('an'); platzMachen(false);
+            setTimeout(()=>{banner.hidden=true;},340); }
   }
+  // Bei Drehung oder Umbruch aendert sich die Bannerhoehe.
+  window.addEventListener('resize',function(){
+    if(document.body.classList.contains('cb-offen'))platzMachen(true);
+  });
 
   function setzen(ja){
     schreib(ja?'ja':'nein');
@@ -2639,12 +2668,6 @@ window.ofMessung = function(){};   // wird unten ersetzt, wenn ADS_ID gesetzt is
     if(!ziel || lies()!=='ja')return;
     gtag('event','conversion', Object.assign({send_to:ziel}, zusatz||{}));
   };
-
-  // Telefonklicks: Kopfzeile, Kontaktkarte, Handy-Leiste.
-  document.addEventListener('click', function(e){
-    const a=e.target.closest && e.target.closest('a[href^="tel:"]');
-    if(a)window.ofMessung(CONV_ANRUF);
-  }, true);
 })();
 
 
@@ -3565,11 +3588,37 @@ if(stepsEl&&'IntersectionObserver' in window){
     });
   },{threshold:.08,rootMargin:'0px 0px -4% 0px'});
   els.forEach(function(el){ io.observe(el); });
-  /* Notbremse: was nach 4 Sekunden noch versteckt ist, wird sichtbar gemacht */
+
+  /* Zweite Absicherung beim Scrollen.
+     Der Beobachter meldet gebuendelt. Wischt jemand sehr schnell, kann eine
+     Karte den Bildschirm betreten und wieder verlassen, bevor die Meldung
+     ankommt – dann bliebe sie unsichtbar, bis man zurueckscrollt. Diese
+     Pruefung laeuft einmal pro Bild mit, kostet nichts und haengt sich
+     selbst aus, sobald alles sichtbar ist. */
+  var offen = els.slice(), warte = false;
+  function nachpruefen(){
+    warte = false;
+    for(var i = offen.length - 1; i >= 0; i--){
+      var el = offen[i], r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight && r.bottom > 0){
+        el.classList.add('in'); io.unobserve(el); offen.splice(i, 1);
+      }
+    }
+    if(!offen.length){
+      window.removeEventListener('scroll', anstossen);
+      window.removeEventListener('resize', anstossen);
+    }
+  }
+  function anstossen(){ if(!warte){ warte = true; requestAnimationFrame(nachpruefen); } }
+  window.addEventListener('scroll', anstossen, {passive:true});
+  window.addEventListener('resize', anstossen, {passive:true});
+
+  /* Notbremse: was nach 4 Sekunden noch versteckt ist und bereits im Sichtfeld
+     war oder daran vorbeigescrollt wurde, wird sichtbar gemacht. */
   setTimeout(function(){
     els.forEach(function(el){
       var r = el.getBoundingClientRect();
-      if(r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+      if(r.top < window.innerHeight) el.classList.add('in');
     });
   }, 4000);
 })();

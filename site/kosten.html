@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Was kostet eine Entrümpelung? Preise Wiesbaden &amp; Rhein-Main</title>
+<meta name="description" content="Was eine Entrümpelung wirklich kostet: echte Preisspannen nach Objektgröße, alle Zuschläge offen benannt. Für Wiesbaden, Mainz, Frankfurt und das Rhein-Main-Gebiet.">
+<link rel="canonical" href="https://objektfrei.de/kosten">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#24382F">
+<link rel="preload" href="/assets/fonts/archivo-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans-var.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+/* Schriften vom eigenen Server – keine Verbindung zu Google */
+@font-face{font-family:'Archivo';src:url('/assets/fonts/archivo-var.ttf') format('truetype-variations');
+  font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Sans';src:url('/assets/fonts/instrument-sans-var.ttf') format('truetype-variations');
+  font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url('/assets/fonts/plexmono-500.ttf') format('truetype');
+  font-weight:500;font-style:normal;font-display:swap}
+</style>
+<style>
+:root{
+  --cream:#F1EDE4;--cream-soft:#EAE5D9;--green:#26382C;--green-deep:#1B2A21;
+  --rust:#A65621;--rust-soft:#B96A33;--line:rgba(38,56,44,.16);
+  --line-light:rgba(241,237,228,.18);--max:900px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--cream);color:var(--green);
+  line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+
+/* ---------- Kopfzeile ---------- */
+header{position:sticky;top:0;z-index:20;background:var(--cream);border-bottom:1px solid var(--line);
+  padding:14px 0}
+.kopf{display:flex;align-items:center;gap:0}
+.brand{display:inline-flex;align-items:center;text-decoration:none;color:var(--green)}
+.brand img{width:29px;height:22px;margin-right:16px}
+.brand span{font-family:'Archivo',sans-serif;font-weight:750;letter-spacing:.14em;font-size:16px}
+.brand span i{font-style:normal;color:var(--rust)}
+.kopf-tel{margin-left:auto;display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  font-weight:600;font-size:14.5px;color:var(--green);white-space:nowrap;
+  padding:9px 15px;border:1px solid var(--line);border-radius:99px}
+@media(max-width:600px){.kopf-tel span{display:none}.kopf-tel{padding:9px;border-radius:12px}}
+
+/* ---------- Titelbereich ---------- */
+.kopfteil{background:var(--green-deep);color:var(--cream);padding:52px 0 46px}
+.krume{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.62;margin-bottom:16px}
+.krume a{color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(241,237,228,.3)}
+h1{font-family:'Archivo',sans-serif;font-weight:750;font-size:clamp(29px,5.2vw,45px);
+  line-height:1.12;letter-spacing:-.01em;margin-bottom:18px}
+.vorspann{font-size:clamp(16px,2vw,18.5px);opacity:.9;max-width:60ch}
+
+/* ---------- Fließtext ---------- */
+main{padding:0 0 10px}
+section{padding:46px 0}
+section+section{border-top:1px solid var(--line)}
+h2{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(23px,3.2vw,31px);
+  line-height:1.2;margin:0 0 14px}
+h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;margin:26px 0 7px}
+p{margin-bottom:14px;max-width:68ch}
+ul{margin:0 0 16px 20px}
+li{margin-bottom:7px;max-width:66ch}
+strong{font-weight:600}
+a{color:var(--rust)}
+.klein{font-size:14px;opacity:.75}
+
+/* ---------- Preistabelle ---------- */
+.preis-tab{width:100%;border-collapse:collapse;margin:20px 0 8px;font-size:15.5px}
+.preis-tab th{background:var(--green);color:var(--cream);text-align:left;padding:11px 14px;
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.preis-tab td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.preis-tab tr:nth-child(even) td{background:rgba(255,255,255,.45)}
+.preis-tab .pv{font-family:'Archivo',sans-serif;font-weight:700;white-space:nowrap}
+@media(max-width:620px){
+  .preis-tab,.preis-tab tbody,.preis-tab tr,.preis-tab td{display:block;width:100%}
+  .preis-tab thead{display:none}
+  .preis-tab tr{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.55);
+    margin-bottom:10px;padding:12px 14px}
+  .preis-tab tr:nth-child(even) td{background:none}
+  .preis-tab td{border:0;padding:2px 0}
+  .preis-tab td:first-child{font-weight:600;margin-bottom:4px}
+  .preis-tab .pv{font-size:19px;color:var(--rust)}
+}
+
+/* ---------- Faktoren ---------- */
+.fak{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0 4px}
+.fak-k{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.fak-k b{display:block;font-family:'Archivo',sans-serif;font-size:16px;margin-bottom:3px}
+.fak-k .d{font-family:'Archivo',sans-serif;font-weight:750;color:var(--rust);font-size:20px;margin-bottom:5px}
+.fak-k p{font-size:14px;margin:0;opacity:.85}
+
+/* ---------- Hinweiskasten ---------- */
+.kasten{background:var(--cream-soft);border-left:4px solid var(--rust);border-radius:0 10px 10px 0;
+  padding:18px 20px;margin:20px 0}
+.kasten p:last-child{margin-bottom:0}
+
+/* ---------- Knöpfe ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'Archivo',sans-serif;font-weight:600;
+  font-size:16px;padding:15px 26px;border-radius:99px;text-decoration:none;transition:background .18s ease}
+.btn-p{background:var(--rust);color:#fff}
+.btn-p:hover{background:var(--rust-soft)}
+.btn-o{border:2px solid var(--green);color:var(--green)}
+.btn-o:hover{background:var(--green);color:var(--cream)}
+/* Im dunklen Titelbereich wuerde der Umriss-Knopf gruen auf gruen stehen. */
+.kopfteil .btn-o{border-color:var(--cream);color:var(--cream)}
+.kopfteil .btn-o:hover{background:var(--cream);color:var(--green-deep)}
+.knopfreihe{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+
+/* ---------- FAQ ---------- */
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{font-family:'Archivo',sans-serif;font-weight:600;font-size:17px;cursor:pointer;
+  list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-weight:400;font-size:22px;line-height:1;color:var(--rust);flex:0 0 auto}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;font-size:15.5px}
+
+/* ---------- Abschluss ---------- */
+.schluss{background:var(--rust);color:#fff;border-radius:16px;padding:36px 30px;margin:0 0 46px}
+.schluss h2{color:#fff;margin-bottom:10px}
+.schluss p{color:#fff;opacity:.93;max-width:56ch}
+.schluss .btn-l{background:var(--cream);color:var(--green)}
+.schluss .btn-l:hover{background:#fff}
+
+/* ---------- Fußzeile ---------- */
+footer{background:var(--green-deep);color:var(--cream);padding:34px 0}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;font-size:14.5px}
+footer a{color:var(--cream);opacity:.85;text-decoration:none;border-bottom:1px solid transparent}
+footer a:hover{opacity:1;border-bottom-color:rgba(241,237,228,.5)}
+footer .c{flex:0 0 100%;opacity:.55;font-size:13.5px;margin-top:6px}
+
+/* ---------- Einwilligungsbanner ---------- */
+.cbanner{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--green-deep);color:var(--cream);
+  border-top:2px solid var(--rust);padding:18px 20px calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -20px 40px -24px rgba(0,0,0,.8);transform:translateY(100%);transition:transform .32s ease}
+.cbanner.an{transform:translateY(0)}
+.cb-in{max-width:var(--max);margin:0 auto;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.cb-txt{flex:1 1 360px;font-size:14px;line-height:1.6;opacity:.94;max-width:none}
+.cb-txt a{color:#D08650}
+.cb-btns{display:flex;gap:10px;flex:0 0 auto}
+.cb-btn{font-family:'Archivo',sans-serif;font-weight:600;font-size:14.5px;padding:12px 22px;border-radius:99px;
+  cursor:pointer;border:2px solid var(--cream);background:none;color:var(--cream);min-width:132px}
+.cb-btn:hover{background:var(--cream);color:var(--green-deep)}
+.cb-btn.ja{background:var(--rust);border-color:var(--rust);color:#fff}
+.cb-btn.ja:hover{background:var(--rust-soft);border-color:var(--rust-soft)}
+@media(max-width:720px){
+  .cb-txt{flex:1 1 100%;font-size:13.5px}
+  .cb-btns{flex:1 1 100%}
+  .cb-btn{flex:1 1 0;min-width:0;padding:13px 10px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cbanner{transition:none}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet eine Entrümpelung pro Quadratmeter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Je nach Objekt und Zustand liegen wir bei rund 35 bis 65 € pro Quadratmeter. Die Zahl ist allerdings mit Vorsicht zu genießen: Eine leergeräumte 90-m²-Wohnung kostet weniger als eine vollgestellte 50-m²-Wohnung. Der Füllgrad wiegt schwerer als die Fläche – deshalb fragt unser Rechner beides ab."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann der Preis am Einsatztag noch steigen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nur wenn sich die Grundlage ändert – etwa wenn ein zusätzlicher Kellerraum dazukommt, die Menge deutlich über dem Besichtigten liegt oder nicht angekündigter Sondermüll auftaucht. In dem Fall sprechen wir Sie an, bevor wir anfangen, und stimmen den Mehraufwand ab. Ohne diese Abstimmung erfolgt keine Nachberechnung."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wer zahlt die Entrümpelung bei einer Haushaltsauflösung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In der Regel die Erben, aus dem Nachlass. Bei mehreren Erben brauchen wir vor Beginn die Freigabe aller Berechtigten in Textform – das schützt Sie und uns. Bei einer Zwangsräumung räumen wir erst nach Freigabe durch den Gerichtsvollzieher. Sind Sie Mieter und die Wohnung muss besenrein übergeben werden, zahlt üblicherweise der ausziehende Mietvertragspartner."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was kostet die Entsorgung von Asbest oder Gefahrstoffen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Asbest und künstliche Mineralfasern sind nicht Teil unseres Festpreises. Solche Arbeiten sind zertifizierten Fachbetrieben vorbehalten, und wir bieten sie bewusst nicht an. Finden wir bei der Besichtigung entsprechende Materialien – etwa alte Bodenbeläge oder Eternitplatten –, sagen wir Ihnen das und nennen einen Fachbetrieb. Gewöhnlicher Sondermüll wie Farben und Lacke ist davon nicht betroffen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Lässt sich eine Entrümpelung steuerlich absetzen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Für privat beauftragte Haushalte kommt § 35a EStG für haushaltsnahe Dienstleistungen in Betracht: Absetzbar ist dann ein Teil der Arbeitskosten , nicht das Material und nicht die Entsorgungsgebühren. Voraussetzung ist eine Rechnung, die den Lohnanteil gesondert ausweist, und die Zahlung per Überweisung – Barzahlung erkennt das Finanzamt nicht an. Wir weisen den Lohnanteil auf Wunsch getrennt aus. Ob und in welcher Höhe es in Ihrem Fall greift, klärt Ihr Steuerberater."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kostet die Besichtigung etwas, wenn ich danach nicht beauftrage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. Die Besichtigung und das schriftliche Angebot sind kostenlos und unverbindlich. Es gibt keine Anfahrtspauschale und keine versteckte Gebühr, wenn Sie sich anders entscheiden."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Gibt es einen Zuschlag für Anfahrten außerhalb des Rhein-Main-Gebiets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Innerhalb des Rhein-Main-Gebiets ist die Anfahrt im Preis enthalten – das gilt für Wiesbaden, Mainz, Frankfurt, Offenbach, Darmstadt, Hanau, Rüsselsheim, Hofheim und die umliegenden Orte. Liegt Ihr Objekt weiter entfernt, klären wir die Anfahrt vorab und nennen sie offen im Angebot."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Startseite",
+      "item": "https://objektfrei.de/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Kosten",
+      "item": "https://objektfrei.de/kosten"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Was kostet eine Entrümpelung? Preise Wiesbaden & Rhein-Main",
+  "description": "Was eine Entrümpelung wirklich kostet: echte Preisspannen nach Objektgröße, alle Zuschläge offen benannt. Für Wiesbaden, Mainz, Frankfurt und das Rhein-Main-Gebiet.",
+  "url": "https://objektfrei.de/kosten",
+  "inLanguage": "de-DE",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Objektfrei",
+    "url": "https://objektfrei.de/"
+  },
+  "about": {
+    "@type": "Service",
+    "name": "Entrümpelung und Haushaltsauflösung",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Objektfrei",
+      "telephone": "+49 611 16889631",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bahnhofstraße 42",
+        "postalCode": "65185",
+        "addressLocality": "Wiesbaden",
+        "addressRegion": "Hessen",
+        "addressCountry": "DE"
+      }
+    },
+    "areaServed": [
+      "Wiesbaden",
+      "Mainz",
+      "Frankfurt am Main",
+      "Offenbach",
+      "Darmstadt",
+      "Hanau",
+      "Rüsselsheim",
+      "Hofheim am Taunus",
+      "Rhein-Main-Gebiet"
+    ]
+  }
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap kopf">
+    <a class="brand" href="/">
+      <img src="/assets/logo-mark.png" width="114" height="88" alt="" aria-hidden="true">
+      <span>OBJEKT<i>FREI</i></span>
+    </a>
+    <a class="kopf-tel" href="tel:+4961116889631">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span>0611 16889631</span>
+    </a>
+  </div>
+</header>
+
+<div class="kopfteil">
+  <div class="wrap">
+    <p class="krume"><a href="/">Objektfrei</a> · Kosten</p>
+    <h1>Was kostet eine Entrümpelung?</h1>
+    <p class="vorspann">Echte Preisspannen für Wiesbaden, Mainz, Frankfurt und das gesamte
+      Rhein-Main-Gebiet – nach Objektgröße, mit allen Zuschlägen offen benannt. Keine
+      Lockpreise, keine Nachberechnung hinterher.</p>
+    <div class="knopfreihe">
+      <a class="btn btn-p" href="/#rechner" data-quelle="Kostenseite">Preis in 60 Sekunden berechnen</a>
+      <a class="btn btn-o" href="tel:+4961116889631">Anrufen</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<section>
+  <div class="wrap">
+    <h2>Preise nach Objektgröße</h2>
+    <p>Die folgenden Spannen gelten für ein <strong>normal möbliertes Objekt im Erdgeschoss</strong>,
+      inklusive Anfahrt im Rhein-Main-Gebiet, Demontage von Standardmöbeln, Abtransport, fachgerechter
+      Entsorgung, besenreiner Übergabe und Mehrwertsteuer. Es sind dieselben Werte, die auch unser
+      <a href="/#rechner">Preisrechner</a> ausgibt.</p>
+
+    <table class="preis-tab">
+      <thead><tr><th>Objekt</th><th>Preisspanne</th></tr></thead>
+      <tbody>
+        <tr><td>1-Zimmer-Wohnung, bis 50 m²</td><td class="pv">1.600 – 2.200 €</td></tr>
+        <tr><td>2-Zimmer-Wohnung, 50–70 m²</td><td class="pv">2.000 – 2.750 €</td></tr>
+        <tr><td>3-Zimmer-Wohnung, 70–90 m²</td><td class="pv">2.850 – 3.950 €</td></tr>
+        <tr><td>4-Zimmer-Wohnung, 90–110 m²</td><td class="pv">4.250 – 5.900 €</td></tr>
+        <tr><td>Einfamilienhaus bis ca. 120 m²</td><td class="pv">4.900 – 6.850 €</td></tr>
+        <tr><td>Einfamilienhaus über 120 m²</td><td class="pv">6.250 – 8.750 €</td></tr>
+        <tr><td>Gewerbefläche bis 100 m²</td><td class="pv">2.850 – 3.950 €</td></tr>
+        <tr><td>Gewerbefläche 100–300 m²</td><td class="pv">6.250 – 8.750 €</td></tr>
+      </tbody>
+    </table>
+    <p class="klein">Alle Angaben brutto inklusive 19 % Mehrwertsteuer. Größere Gewerbeflächen
+      kalkulieren wir nach der kostenlosen Besichtigung.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Was den Preis verändert</h2>
+    <p>Die Quadratmeterzahl ist nur die halbe Wahrheit. Was ein Objekt teuer macht, ist die Menge
+      und der Weg nach draußen. Die folgenden Werte beziehen sich jeweils auf eine
+      <strong>3-Zimmer-Wohnung mit 70–90 m²</strong> als Ausgangspunkt (2.850 – 3.950 €):</p>
+
+    <div class="fak">
+      <div class="fak-k"><b>Füllgrad</b><span class="d">−20 % bis +55 %</span>
+        <p>Wenig möbliert: 2.300 – 3.150 €. Volle Räume: 3.550 – 4.950 €. Kaum begehbar:
+          4.400 – 6.100 €. Das ist der mit Abstand größte Hebel.</p></div>
+      <div class="fak-k"><b>Etage ohne Aufzug</b><span class="d">+12 % bis +28 %</span>
+        <p>3.–4. Etage ohne Aufzug: 3.200 – 4.750 €. Ab der 5. Etage: 3.350 – 5.050 €.
+          Jede Treppe kostet Personalzeit.</p></div>
+      <div class="fak-k"><b>Keller oder Dachboden</b><span class="d">+400 bis +910 €</span>
+        <p>Ein normal gefüllter Keller schlägt mit rund 510 € zu Buche, ein großer mit rund 730 €.
+          Bei viel Inhalt entsprechend mehr.</p></div>
+      <div class="fak-k"><b>Einbauküche demontieren</b><span class="d">+490 bis +890 €</span>
+        <p>Abbau, Abtransport und Entsorgung der kompletten Küchenzeile inklusive Geräten.</p></div>
+      <div class="fak-k"><b>Bodenbelag entfernen</b><span class="d">+300 bis +1.150 €</span>
+        <p>Teppich, Laminat oder PVC herausnehmen und entsorgen – je nach Fläche.
+          Bei 80 m² rund 400 – 600 €.</p></div>
+      <div class="fak-k"><b>Sondermüll</b><span class="d">+150 bis +450 €</span>
+        <p>Farben, Lacke, Chemikalien, Leuchtstoffröhren. Wird getrennt angeliefert und
+          nach Gewicht abgerechnet.</p></div>
+      <div class="fak-k"><b>Endreinigung</b><span class="d">+350 bis +1.300 €</span>
+        <p>Über besenrein hinaus, nutzungsfertig für die Übergabe. Bei 80 m² rund 470 – 710 €.</p></div>
+      <div class="fak-k"><b>Express in 24–48 Stunden</b><span class="d">+15 % bis +25 %</span>
+        <p>Kurzfristiger Termin: 3.300 – 4.950 €. Innerhalb einer Woche: 3.150 – 4.550 €.
+          Sonntags räumen wir nicht.</p></div>
+    </div>
+
+    <h3>Messie-Räumung und Nachlass</h3>
+    <p>Eine <strong>Messie-Räumung</strong> liegt bei derselben Wohnung bei
+      <strong>4.000 – 5.550 €</strong>. Der Aufschlag deckt Schutzausrüstung, deutlich mehr
+      Personalzeit und die getrennte Entsorgung stark verschmutzter Gegenstände.
+      Bei einer <strong>Haushaltsauflösung nach einem Todesfall</strong> gilt dieselbe Preistabelle –
+      wir arbeiten dort nur langsamer und sichten jedes Fach, bevor etwas den Raum verlässt.</p>
+
+    <h3>Reine Reinigung ohne Räumung</h3>
+    <p>Soll nur gereinigt werden, rechnen wir getrennt: bis 50 m² <strong>810 – 1.150 €</strong>,
+      bis 100 m² <strong>1.000 – 1.420 €</strong>. Bei starker Verschmutzung kommt ein Zuschlag dazu.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Was den Preis senkt: die Wertanrechnung</h2>
+    <p>Nicht alles, was aus einer Wohnung kommt, ist Abfall. Massivholzmöbel, Antiquitäten,
+      Werkzeug, Schmuck, funktionsfähige Elektrogeräte, Sammlungen und Musikinstrumente prüfen
+      wir vor Ort und <strong>rechnen ihren Wert direkt auf den Festpreis an</strong>. Der Betrag
+      steht als eigene Zeile im Angebot – Sie sehen also, was angerechnet wurde und warum.</p>
+    <div class="kasten">
+      <p><strong>Wichtig für Sie:</strong> Nehmen Sie Wertgegenstände und persönliche Unterlagen
+        vorher heraus oder benennen Sie sie ausdrücklich. Was uns nicht bekannt ist, können wir
+        weder anrechnen noch gesondert behandeln. Im Zweifel legen wir Gefundenes beiseite und
+        fragen nach, statt zu entscheiden.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Warum eine Spanne und kein fester Preis?</h2>
+    <p>Weil ein seriöser Festpreis eine Besichtigung voraussetzt. Wer am Telefon sofort eine
+      exakte Zahl nennt, hat entweder großzügig aufgeschlagen oder wird am Einsatztag
+      nachberechnen. Beides wollen wir nicht.</p>
+    <p>Deshalb läuft es bei uns so: Sie berechnen Ihre Spanne im
+      <a href="/#rechner">Preisrechner</a> oder rufen an. Wir kommen kostenlos vorbei und sehen
+      uns an, was tatsächlich da ist. Danach erhalten Sie einen <strong>schriftlichen
+      Festpreis</strong>, der hält – solange die Angaben stimmen. Kommen am Einsatztag Räume oder
+      Mengen dazu, die vorher nicht zu sehen waren, sprechen wir das <strong>vor Arbeitsbeginn</strong>
+      an. Ohne Ihre Zustimmung wird nichts nachberechnet.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Häufige Fragen zu den Kosten</h2>
+
+    <details>
+      <summary>Was kostet eine Entrümpelung pro Quadratmeter?</summary>
+      <p>Je nach Objekt und Zustand liegen wir bei rund 35 bis 65 € pro Quadratmeter. Die Zahl ist
+        allerdings mit Vorsicht zu genießen: Eine leergeräumte 90-m²-Wohnung kostet weniger als eine
+        vollgestellte 50-m²-Wohnung. Der Füllgrad wiegt schwerer als die Fläche – deshalb fragt
+        unser Rechner beides ab.</p>
+    </details>
+
+    <details>
+      <summary>Kann der Preis am Einsatztag noch steigen?</summary>
+      <p>Nur wenn sich die Grundlage ändert – etwa wenn ein zusätzlicher Kellerraum dazukommt,
+        die Menge deutlich über dem Besichtigten liegt oder nicht angekündigter Sondermüll
+        auftaucht. In dem Fall sprechen wir Sie an, bevor wir anfangen, und stimmen den Mehraufwand
+        ab. Ohne diese Abstimmung erfolgt keine Nachberechnung.</p>
+    </details>
+
+    <details>
+      <summary>Wer zahlt die Entrümpelung bei einer Haushaltsauflösung?</summary>
+      <p>In der Regel die Erben, aus dem Nachlass. Bei mehreren Erben brauchen wir vor Beginn
+        die Freigabe aller Berechtigten in Textform – das schützt Sie und uns. Bei einer
+        Zwangsräumung räumen wir erst nach Freigabe durch den Gerichtsvollzieher. Sind Sie
+        Mieter und die Wohnung muss besenrein übergeben werden, zahlt üblicherweise der
+        ausziehende Mietvertragspartner.</p>
+    </details>
+
+    <details>
+      <summary>Was kostet die Entsorgung von Asbest oder Gefahrstoffen?</summary>
+      <p>Asbest und künstliche Mineralfasern sind <strong>nicht</strong> Teil unseres Festpreises.
+        Solche Arbeiten sind zertifizierten Fachbetrieben vorbehalten, und wir bieten sie bewusst
+        nicht an. Finden wir bei der Besichtigung entsprechende Materialien – etwa alte
+        Bodenbeläge oder Eternitplatten –, sagen wir Ihnen das und nennen einen Fachbetrieb.
+        Gewöhnlicher Sondermüll wie Farben und Lacke ist davon nicht betroffen.</p>
+    </details>
+
+    <details>
+      <summary>Lässt sich eine Entrümpelung steuerlich absetzen?</summary>
+      <p>Für privat beauftragte Haushalte kommt § 35a EStG für haushaltsnahe Dienstleistungen
+        in Betracht: Absetzbar ist dann ein Teil der <strong>Arbeitskosten</strong>, nicht das
+        Material und nicht die Entsorgungsgebühren. Voraussetzung ist eine Rechnung, die den
+        Lohnanteil gesondert ausweist, und die Zahlung per Überweisung – Barzahlung erkennt das
+        Finanzamt nicht an. Wir weisen den Lohnanteil auf Wunsch getrennt aus. Ob und in welcher
+        Höhe es in Ihrem Fall greift, klärt Ihr Steuerberater.</p>
+    </details>
+
+    <details>
+      <summary>Kostet die Besichtigung etwas, wenn ich danach nicht beauftrage?</summary>
+      <p>Nein. Die Besichtigung und das schriftliche Angebot sind kostenlos und unverbindlich.
+        Es gibt keine Anfahrtspauschale und keine versteckte Gebühr, wenn Sie sich anders
+        entscheiden.</p>
+    </details>
+
+    <details>
+      <summary>Gibt es einen Zuschlag für Anfahrten außerhalb des Rhein-Main-Gebiets?</summary>
+      <p>Innerhalb des Rhein-Main-Gebiets ist die Anfahrt im Preis enthalten – das gilt für
+        Wiesbaden, Mainz, Frankfurt, Offenbach, Darmstadt, Hanau, Rüsselsheim, Hofheim und die
+        umliegenden Orte. Liegt Ihr Objekt weiter entfernt, klären wir die Anfahrt vorab und
+        nennen sie offen im Angebot.</p>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="schluss">
+      <h2>Ihre Spanne in 60 Sekunden</h2>
+      <p>Objekt, Größe, Zustand – mehr braucht der Rechner nicht. Sie sehen Ihre Preisspanne
+        sofort, ohne Kontaktdaten zu hinterlassen.</p>
+      <div class="knopfreihe">
+        <a class="btn btn-l" href="/#rechner" data-quelle="Kostenseite-Schluss">Preis berechnen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="/">Startseite</a>
+    <a href="/#leistungen">Entrümpelung &amp; Haushaltsauflösung</a>
+    <a href="/#rechner">Preisrechner</a>
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html">Datenschutz</a>
+    <a href="/agb.html">AGB</a>
+    <a href="/widerruf.html">Widerruf</a>
+    <a href="#" id="cbneu" hidden>Cookie-Einstellungen</a>
+    <div class="c">© 2026 Objektfrei · Wiesbaden &amp; Rhein-Main-Gebiet</div>
+  </div>
+</footer>
+
+<div class="cbanner" id="cbanner" role="dialog" aria-live="polite"
+     aria-label="Einwilligung in die Messung" hidden>
+  <div class="cb-in">
+    <p class="cb-txt"><b>Dürfen wir messen, welche Anzeige zu Ihnen geführt hat?</b><br>
+      Dafür setzt Google ein Cookie. Sie können ablehnen – die Seite funktioniert vollständig
+      weiter. Ohne Ihre Zustimmung baut diese Seite keine Verbindung zu Google auf.
+      <a href="/datenschutz.html">Mehr in der Datenschutzerklärung</a></p>
+    <div class="cb-btns">
+      <button type="button" class="cb-btn" id="cbnein">Ablehnen</button>
+      <button type="button" class="cb-btn ja" id="cbja">Akzeptieren</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==========================================================
+// Dieselben Kennungen wie in der index.html eintragen.
+// Leer = kein Banner, kein Google-Tag, keine externe Verbindung.
+// ==========================================================
+const ADS_ID    = 'AW-18288007764';
+// Anrufe laufen ueber die Google-Anrufweiterleitung, nicht ueber Klickzaehlung.
+const CALL_CONV = 'AW-18288007764/HNYaCIO704EdENS0s5BE';
+const TEL_NUMMER = '0611 16889631';
+
+// Werbe-Parameter an die Startseite weiterreichen. Sonst geht die Herkunft
+// beim Klick von /kosten auf /#rechner verloren und die Anfrage-Mail
+// meldet "Direkt", obwohl der Besuch aus einer Anzeige kam.
+(function(){
+  var q = location.search;
+  if(!q || q.length < 2) return;
+  var p = new URLSearchParams(q), behalten = new URLSearchParams();
+  ['gclid','gbraid','wbraid','gad_source','utm_source','utm_medium','utm_campaign','utm_term','utm_content','q']
+    .forEach(function(k){ if(p.get(k)) behalten.set(k, p.get(k)); });
+  if(![...behalten].length) return;
+  document.querySelectorAll('a[href^="/"]').forEach(function(a){
+    var h = a.getAttribute('href');
+    if(h.indexOf('?') > -1) return;
+    var t = h.split('#');
+    a.setAttribute('href', t[0] + '?' + behalten.toString() + (t[1] ? '#' + t[1] : ''));
+  });
+})();
+
+(function(){
+  var SCHL = 'objektfrei_einwilligung';
+  function lies(){try{return localStorage.getItem(SCHL)||'';}catch(e){return '';}}
+  function schreib(v){try{localStorage.setItem(SCHL,v);}catch(e){}}
+  var banner = document.getElementById('cbanner'), neuLnk = document.getElementById('cbneu');
+  if(!ADS_ID){ if(banner) banner.remove(); return; }
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('consent','default',{
+    ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied',
+    analytics_storage:'denied', functionality_storage:'granted',
+    security_storage:'granted', wait_for_update:500
+  });
+
+  var geladen=false;
+  function tagLaden(){
+    if(geladen)return; geladen=true;
+    var s=document.createElement('script');
+    s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+ADS_ID;
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', ADS_ID, {allow_enhanced_conversions:true});
+    if(CALL_CONV) gtag('config', CALL_CONV, {phone_conversion_number: TEL_NUMMER});
+  }
+  function zeigen(an){
+    if(!banner)return;
+    if(an){ banner.hidden=false; requestAnimationFrame(function(){banner.classList.add('an');}); }
+    else  { banner.classList.remove('an'); setTimeout(function(){banner.hidden=true;},340); }
+  }
+  function setzen(ja){
+    schreib(ja?'ja':'nein');
+    gtag('consent','update',{
+      ad_storage: ja?'granted':'denied', ad_user_data: ja?'granted':'denied',
+      ad_personalization: ja?'granted':'denied', analytics_storage: ja?'granted':'denied'});
+    if(ja)tagLaden();
+    zeigen(false);
+    if(neuLnk)neuLnk.hidden=false;
+  }
+  var stand=lies();
+  if(stand==='ja'){ tagLaden(); gtag('consent','update',{
+      ad_storage:'granted',ad_user_data:'granted',
+      ad_personalization:'granted',analytics_storage:'granted'}); }
+  if(stand){ if(neuLnk)neuLnk.hidden=false; } else { setTimeout(function(){zeigen(true);}, 600); }
+
+  var ja=document.getElementById('cbja'), nein=document.getElementById('cbnein');
+  if(ja)  ja.addEventListener('click',  function(){setzen(true);});
+  if(nein)nein.addEventListener('click',function(){setzen(false);});
+  if(neuLnk)neuLnk.addEventListener('click',function(e){e.preventDefault();zeigen(true);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Rechtstexte tragen ohnehin ein noindex im Seitenkopf. Sie hier zusaetzlich
+# zu sperren waere schaedlich: eine per robots.txt gesperrte Seite darf nicht
+# gelesen werden, das noindex darin bliebe also ungelesen.
+
+Sitemap: https://objektfrei.de/sitemap.xml
